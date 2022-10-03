@@ -32,6 +32,7 @@
     "*.cpp": "cpp",
     "iomanip": "cpp",
     "ostream": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "*.tcc": "cpp"
   }
 }
