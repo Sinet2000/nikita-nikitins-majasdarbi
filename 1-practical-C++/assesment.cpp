@@ -1,11 +1,10 @@
 #include <iostream>
-#include <string> // priekš string 
 #include <iomanip> // priekš tabulai
-#include <limits> // lietotaaja input validaācija
+#include <limits> // limits prieks valdiation
+#include <string> // priekš string 
 
-#define lv
+using namespace std;
 
-// TABLE CONST
 #define TEXT_MAIN_WIDTH             50
 #define MENU_AFTER_TEXT_WIDTH       5
 #define MENU_HEADER_LEFT_WIDTH      43
@@ -20,20 +19,19 @@
 #define MENU_EXIT                           6
 #define MENU_AUTHOR                         0
 
-using namespace std;
-
-void displayMenu(string userText);
+//https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/#:~:text=In%20C%2B%2B%20program%20has,just%20need%20to%20import%20them.
 
 // menu helpers
-void displayMenuRow(int menuNumber = 7, string rowTxt = " ");
+void displayMenu(std::string userText);
+void displayMenuRow(int menuNumber = 7, std::string rowTxt = " ");
 int getUserMenuInput();
 
-// menu main functions
-void getNewText(string &currentTxt);
-void displayTextIsEvenOrOdd(string &currentTxt);
-void displayUserTextSum(string &currentTxt);
-void calcTextLengthFactorial(string &currentTxt);
-void displayTxtReverse(string &currentTxt);
+// menu main
+void getNewText(std::string &currentTxt);
+void displayTextIsEvenOrOdd(std::string &currentTxt);
+void displayUserTextSum(std::string &currentTxt);
+void calcTextLengthFactorial(std::string &currentTxt);
+void displayTxtReverse(std::string &currentTxt);
 void displayAuthor();
 
 int main() {
@@ -83,18 +81,10 @@ int main() {
     } 
     while (userInput != MENU_EXIT);
     
-
-    // system("cls");
     return 1;
 }
 
-/* Create menu, where user able:
-    * 1. Input text
-    * 2. Display -> the text length is even or odd
-    * 3. Dispaly sum 1...n, where n = length(text)
-    * 4. Display factorial of n, where n = length(text)
-    * 5. Display factorial n...1
-*/
+
 void displayMenu(string userText) {
 
     cout << right << setfill('-') << setw(MENU_HEADER_LEFT_WIDTH) << "1. Praktiskais darbs";
@@ -147,8 +137,6 @@ int getUserMenuInput() {
 
     return userInput;
 }
-
-
 
 void getNewText(string &currentTxt) {
     cout << "| Lūdzu ievadiet jaunu teksti |\t>>";
