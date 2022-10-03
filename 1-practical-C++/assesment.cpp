@@ -2,8 +2,11 @@
 #include <iomanip> // priekš tabulai
 #include <limits> // limits prieks valdiation
 #include <string> // priekš string 
+#include <locale> // lai mainīt lokalizāciju, man uz datora pēc default ir en_GB un gribas mainīt, jo tas ir darba dators ;(
 
 using namespace std;
+
+#define lv_LV
 
 #define TEXT_MAIN_WIDTH             50
 #define MENU_AFTER_TEXT_WIDTH       5
@@ -19,24 +22,33 @@ using namespace std;
 #define MENU_EXIT                           6
 #define MENU_AUTHOR                         0
 
+// par locale
 //https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/#:~:text=In%20C%2B%2B%20program%20has,just%20need%20to%20import%20them.
 
+// par wcin
+// https://www.programiz.com/cpp-programming/library-function/iostream/wcin
+
 // menu helpers
-void displayMenu(std::string userText);
+void displayMenu(wchar_t *userText);
 void displayMenuRow(int menuNumber = 7, std::string rowTxt = " ");
 int getUserMenuInput();
 
 // menu main
-void getNewText(std::string &currentTxt);
-void displayTextIsEvenOrOdd(std::string &currentTxt);
-void displayUserTextSum(std::string &currentTxt);
-void calcTextLengthFactorial(std::string &currentTxt);
-void displayTxtReverse(std::string &currentTxt);
+void displayTextIsEvenOrOdd(wchar_t *currentTxt);
+void displayUserTextSum(wchar_t *currentTxt);
+void calcTextLengthFactorial(wchar_t *currentTxt);
+void displayTxtReverse(wchar_t *currentTxt);
 void displayAuthor();
 
-int main() {
 
-    string userText = "Programmas ir jaraksta cilvekiem, kas tas lasis!";
+
+int main() {
+    // from Locales and code pages supported https://www.ibm.com/docs/en/radfws/9.6.1?topic=overview-locales-code-pages-supported
+    setlocale(LC_CTYPE, "lv_LV.1257");
+    //wcin.imbue(locale("lv_LV.1257"));
+    //wcout.imbue(locale("lv_LV.1257"));
+
+    wchar_t userText[200] = L"Programmas ir jaraksta cilvekiem, kas tas lasis!";
     int userInput = MENU_EXIT;
 
     do {
@@ -46,7 +58,16 @@ int main() {
         switch (userInput) {
         
             case MENU_NEW_TXT:
-                getNewText(userText);
+                wcout << L"| Lūdzu ievadiet jaunu tekstu |\t>>";
+
+                // space cin ir pieņemts kā terminating symbol
+                cin.ignore();
+                wcin.getline(userText, 200);
+                wcout << L"\n Teksts nomainīts uz >> " << userText << endl;
+
+                // for(int i = 0; i < wcslen(userText);i++) {
+                //     cout << userText[i];
+                // }
 
                 break;
 
@@ -85,7 +106,7 @@ int main() {
 }
 
 
-void displayMenu(string userText) {
+void displayMenu(wchar_t  *userText) {
 
     cout << right << setfill('-') << setw(MENU_HEADER_LEFT_WIDTH) << "1. Praktiskais darbs";
     cout << setfill('-') << left << setw(MENU_HEADER_RIGHT_WIDTH) << " " << setfill(' ') << endl;
@@ -138,17 +159,8 @@ int getUserMenuInput() {
     return userInput;
 }
 
-void getNewText(string &currentTxt) {
-    cout << "| Lūdzu ievadiet jaunu teksti |\t>>";
-
-    // space cin ir pieņemts kā terminating symbol
-    cin.ignore();
-    getline(cin, currentTxt);
-    cout << "\n Teksts nomainīts uz >> " << currentTxt << endl;
-}
-
-void displayTextIsEvenOrOdd(string &currentTxt) {
-    if (currentTxt.length() % 2 == 0)
+void displayTextIsEvenOrOdd(wchar_t *currentTxt) {
+    if (wcslen(currentTxt) % 2 == 0)
         cout << "\n Teksta garums ir pāra skaitlis!" << endl;
     else 
         cout << "\n Teksta garums ir nepāra skaitlis!" << endl;
@@ -157,10 +169,10 @@ void displayTextIsEvenOrOdd(string &currentTxt) {
     cin.get();
 }
 
-void displayUserTextSum(string &currentTxt) {
+void displayUserTextSum(wchar_t *currentTxt) {
     
     int sum = 0;
-    for(int i = 1; i <= currentTxt.length(); i++) {
+    for(int i = 1; i <= wcslen(currentTxt); i++) {
         sum += i;
     }
 
@@ -170,10 +182,10 @@ void displayUserTextSum(string &currentTxt) {
     cin.get();
 }
 
-void calcTextLengthFactorial(string &currentTxt) {
+void calcTextLengthFactorial(wchar_t *currentTxt) {
 
-    int factorialProduct = 1;
-    for(int i = 1; i <= currentTxt.length(); i++) {
+    unsigned long long factorialProduct = 1;
+    for(int i = 1; i <= wcslen(currentTxt); i++) {
         factorialProduct *= i;
     }
 
@@ -183,10 +195,10 @@ void calcTextLengthFactorial(string &currentTxt) {
     cin.get();
 }
 
-void displayTxtReverse(string &currentTxt) {
+void displayTxtReverse(wchar_t *currentTxt) {
 
     string reverseTxt = "";
-    for(int i = currentTxt.length() - 1; i >= 0; i--) {
+    for(int i = wcslen(currentTxt) - 1; i >= 0; i--) {
         reverseTxt += currentTxt[i];
     }
 
