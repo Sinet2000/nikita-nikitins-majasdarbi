@@ -2,7 +2,7 @@
 #include <iomanip> // priekš tabulai
 #include <limits> // limits prieks valdiation
 #include <string> // priekš string 
-#include <locale> // lai mainīt lokalizāciju, man uz datora pēc default ir en_GB un gribas mainīt, jo tas ir darba dators ;(
+#include <locale> // setLocale 
 
 using namespace std;
 
