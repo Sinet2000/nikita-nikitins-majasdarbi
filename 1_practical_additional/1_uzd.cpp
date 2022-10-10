@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limits> // limits prieks valdiation
+#include <math.h> //sqrt
 
 using namespace std;
 
@@ -36,11 +37,22 @@ int main()
 
 bool isPrimeNumber(int number)
 {
-    if (number == 2)
-        return true;
+    if (number <= 1)
+        return false;
 
     int k = 0;
-    for (int i = 2; i < number - 1; i++)
+    // improved logic:
+    /**
+    * Pieņemsim skaitli N, kas ir naturāls skaitlis (>1),
+    * kas ir products no skaitļa a un b reizināšanas (a<=b pieņemsim),
+    * tad N = a *b, kur 1<a<=b<n,
+    * reizinot ar a, tad:
+    * a^2<=ab
+    * ar b, tad => ab<=b^2
+    * tad intervaals ir => a^2<=ab<=b^2, bet ir zinaams, ka ab = N, taapeec:
+    * a<= sqrt(N) <= b
+    **/
+    for (int i = 2; i <= sqrt(number) ; i++)
     {
         if (number % i == 0)
             k ++;
