@@ -3,7 +3,6 @@
 #include <limits> // limits prieks valdiation
 #include <string> // priekš string 
 #include <locale> // setLocale 
-#include <clocale>
 
 using namespace std;
 
