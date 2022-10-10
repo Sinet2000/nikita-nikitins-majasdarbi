@@ -2,7 +2,8 @@
 #include <iomanip> // priekš tabulai
 #include <limits> // limits prieks valdiation
 #include <string> // priekš string 
-#include <locale> // lai mainīt lokalizāciju, man uz datora pēc default ir en_GB un gribas mainīt, jo tas ir darba dators ;(
+#include <locale> // setLocale 
+#include <clocale>
 
 using namespace std;
 
@@ -25,49 +26,42 @@ using namespace std;
 // par locale
 //https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/#:~:text=In%20C%2B%2B%20program%20has,just%20need%20to%20import%20them.
 
-// par wcin
-// https://www.programiz.com/cpp-programming/library-function/iostream/wcin
+// par cin
+// https://www.programiz.com/cpp-programming/library-function/iostream/cin
 
 // menu helpers
-void displayMenu(wchar_t *userText);
-void displayMenuRow(int menuNumber = 7, std::string rowTxt = " ");
+void displayMenu();
+void displayMenuRow(int menuNumber = 7, wstring rowTxt = L" ");
 int getUserMenuInput();
 
 // menu main
-void displayTextIsEvenOrOdd(wchar_t *currentTxt);
-void displayUserTextSum(wchar_t *currentTxt);
-void calcTextLengthFactorial(wchar_t *currentTxt);
-void displayTxtReverse(wchar_t *currentTxt);
+void displayTextIsEvenOrOdd(wstring currentTxt);
+void displayUserTextSum(wstring currentTxt);
+void calcTextLengthFactorial(wstring currentTxt);
+void displayTxtReverse(wstring currentTxt);
 void displayAuthor();
-
-
 
 int main() {
     // from Locales and code pages supported https://www.ibm.com/docs/en/radfws/9.6.1?topic=overview-locales-code-pages-supported
-    setlocale(LC_CTYPE, "lv_LV.1257");
-    //wcin.imbue(locale("lv_LV.1257"));
-    //wcout.imbue(locale("lv_LV.1257"));
+    setlocale(LC_CTYPE, "");
 
-    wchar_t userText[200] = L"Programmas ir jaraksta cilvekiem, kas tas lasis!";
+    wstring  userText= L"Programmas ir jaraksta cilvekiem, kas tas lasis!";
     int userInput = MENU_EXIT;
 
     do {
-        displayMenu(userText);
+        displayMenu();
         userInput = getUserMenuInput();
 
         switch (userInput) {
         
             case MENU_NEW_TXT:
-                wcout << L"| Lūdzu ievadiet jaunu tekstu |\t>>";
+                cout << "| Lūdzu ievadiet jaunu tekstu |\t>>";
 
                 // space cin ir pieņemts kā terminating symbol
                 cin.ignore();
-                wcin.getline(userText, 200);
-                wcout << L"\n Teksts nomainīts uz >> " << userText << endl;
-
-                // for(int i = 0; i < wcslen(userText);i++) {
-                //     cout << userText[i];
-                // }
+                getline(wcin, userText);
+                
+                wcout << L"Teksts nomainīts uz >> " << userText << endl;
 
                 break;
 
@@ -102,24 +96,25 @@ int main() {
     } 
     while (userInput != MENU_EXIT);
     
-    return 1;
+    system("PAUSE");
+    return 0;
 }
 
 
-void displayMenu(wchar_t  *userText) {
+void displayMenu() {
 
     cout << right << setfill('-') << setw(MENU_HEADER_LEFT_WIDTH) << "1. Praktiskais darbs";
     cout << setfill('-') << left << setw(MENU_HEADER_RIGHT_WIDTH) << " " << setfill(' ') << endl;
 
     displayMenuRow();
 
-    displayMenuRow(MENU_NEW_TXT, "Ievadīt jaunu tekstu");
-    displayMenuRow(MENU_TXT_LENGTH_EVEN_ODD, "Ievadīta teksta garums ir pāra vai nepāra");
-    displayMenuRow(MENU_TXT_SUM, "Izvadīt 1..n (kur n = teksta garums)" );
-    displayMenuRow(MENU_TXT_L_FACTORIAL, "Izvadīt n! kur n = teksta garums");
-    displayMenuRow(MENU_TXT_REVERSE, "Izvadīt tekstu reversā");
-    displayMenuRow(MENU_EXIT, "Beigt darbu");
-    displayMenuRow(MENU_AUTHOR, "Autors");
+    displayMenuRow(MENU_NEW_TXT, L"Ievadīt jaunu tekstu");
+    displayMenuRow(MENU_TXT_LENGTH_EVEN_ODD, L"Ievadīta teksta garums ir pāra vai nepāra");
+    displayMenuRow(MENU_TXT_SUM, L"Izvadīt 1..n (kur n = teksta garums)" );
+    displayMenuRow(MENU_TXT_L_FACTORIAL, L"Izvadīt n! kur n = teksta garums");
+    displayMenuRow(MENU_TXT_REVERSE, L"Izvadīt tekstu reversā");
+    displayMenuRow(MENU_EXIT, L"Beigt darbu");
+    displayMenuRow(MENU_AUTHOR, L"Autors");
 
     displayMenuRow();
 
@@ -128,18 +123,18 @@ void displayMenu(wchar_t  *userText) {
     cout << "\n";
 }
 
-void displayMenuRow(int menuNumber, string rowTxt) {
+void displayMenuRow(int menuNumber, wstring rowTxt) {
 
     if (menuNumber >= MENU_AUTHOR && menuNumber <= MENU_EXIT) 
-        cout << "|\t" << menuNumber << "\t" << left << setw(TEXT_MAIN_WIDTH) << rowTxt  << left << setw(MENU_AFTER_TEXT_WIDTH) << "|" <<  endl;
+        wcout << "|\t" << menuNumber << "\t" << left << setw(TEXT_MAIN_WIDTH) << rowTxt  << left << setw(MENU_AFTER_TEXT_WIDTH) << "|" <<  endl;
     else 
-        cout << "|\t" << " " << "\t" << left << setw(TEXT_MAIN_WIDTH) << rowTxt  << left << setw(MENU_AFTER_TEXT_WIDTH) << "|" <<  endl;
+        wcout << "|\t" << " " << "\t" << left << setw(TEXT_MAIN_WIDTH) << rowTxt  << left << setw(MENU_AFTER_TEXT_WIDTH) << "|" <<  endl;
 }
 
 int getUserMenuInput() {
 
     int userInput;
-    cout << "| Lūdzu izvēlieties (0, 1, 2, 3, 4, 5, 6) |\t>>";
+    wcout << L"| Lūdzu izvēlieties (0, 1, 2, 3, 4, 5, 6)| >> ";
     cin >> userInput;
 
     while (1) {
@@ -147,8 +142,8 @@ int getUserMenuInput() {
             
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "| !!! Nav korekta izvēlē! Ievadiet int vērtību no 0 līdz 6 ! |" << endl;
-            cout << "| Lūdzu izvēlieties (0, 1, 2, 3, 4, 5, 6) |\t>>";
+            wcout << L"| !!! Nav korekta izvēlē! Ievadiet int vērtību no 0 līdz 6 ! |" << endl;
+            wcout << L"| Lūdzu izvēlieties (0, 1, 2, 3, 4, 5, 6) |\t>>";
             cin >> userInput;
         }
 
@@ -159,20 +154,20 @@ int getUserMenuInput() {
     return userInput;
 }
 
-void displayTextIsEvenOrOdd(wchar_t *currentTxt) {
-    if (wcslen(currentTxt) % 2 == 0)
-        cout << "\n Teksta garums ir pāra skaitlis!" << endl;
+void displayTextIsEvenOrOdd(wstring currentTxt) {
+    if (currentTxt.length() % 2 == 0)
+        wcout << L"\n Teksta garums ir pāra skaitlis!" << endl;
     else 
-        cout << "\n Teksta garums ir nepāra skaitlis!" << endl;
+        wcout << L"\n Teksta garums ir nepāra skaitlis!" << endl;
 
     cin.ignore();
     cin.get();
 }
 
-void displayUserTextSum(wchar_t *currentTxt) {
+void displayUserTextSum(wstring currentTxt) {
     
     int sum = 0;
-    for(int i = 1; i <= wcslen(currentTxt); i++) {
+    for(int i = 1; i <= currentTxt.length(); i++) {
         sum += i;
     }
 
@@ -182,27 +177,27 @@ void displayUserTextSum(wchar_t *currentTxt) {
     cin.get();
 }
 
-void calcTextLengthFactorial(wchar_t *currentTxt) {
+void calcTextLengthFactorial(wstring currentTxt) {
 
     unsigned long long factorialProduct = 1;
-    for(int i = 1; i <= wcslen(currentTxt); i++) {
+    for(int i = 1; i <= currentTxt.length(); i++) {
         factorialProduct *= i;
     }
 
-    cout << "\n Faktoriāls ir: " << factorialProduct << endl;
+    wcout << L"\n Faktoriāls ir: " << factorialProduct << endl;
     
     cin.ignore();
     cin.get();
 }
 
-void displayTxtReverse(wchar_t *currentTxt) {
+void displayTxtReverse(wstring currentTxt) {
 
-    string reverseTxt = "";
-    for(int i = wcslen(currentTxt) - 1; i >= 0; i--) {
-        reverseTxt += currentTxt[i];
+    wcout << L"\n Teksts reversā: ";
+    for(int i = currentTxt.length() - 1; i >= 0; i--) {
+        wcout << currentTxt[i];
     }
 
-    cout << "\n Teksts reversā: " << reverseTxt << endl;
+    cout << endl;
     
     cin.ignore();
     cin.get();
