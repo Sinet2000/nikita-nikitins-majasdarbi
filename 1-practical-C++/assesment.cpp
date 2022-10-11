@@ -280,8 +280,9 @@ void eraseFromTextIfTimesMet(string &currentTxt, char charToErase,
     string newTxt = "";
 
     for (char c : currentTxt) {
-        cout << "\n" << c << " -  " << charToErase << endl;
-        
+
+        // nezinu, vai ir jaizmanto tolower ??? (bija defineets tikai '')
+
         if (c == charToErase) {
             count++;
             continue;
