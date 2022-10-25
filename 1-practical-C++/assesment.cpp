@@ -27,33 +27,39 @@ using namespace std;
 #define COUNT_NUMERIC 9
 #define MENU_AUTHOR 0
 
-// par locale
-// https://www.geeksforgeeks.org/header-files-in-c-cpp-and-its-uses/#:~:text=In%20C%2B%2B%20program%20has,just%20need%20to%20import%20them.
+#pragma region Menu and Input helpers
 
-// par cin
-// https://www.programiz.com/cpp-programming/library-function/iostream/cin
-
-// menu helpers
 void displayMenu();
 void displayMenuRow(int menuNumber = 10, string rowTxt = " ");
 int getUserMenuInput();
 
-// menu main
+#pragma endregion Menu and Input helpers
+
+#pragma region Main Tasks
+
 void displayTextIsEvenOrOdd(string currentTxt);
 void displayUserTextSum(string currentTxt);
 void calcTextLengthFactorial(string currentTxt);
 void displayTxtReverse(string currentTxt);
 
-// extra tasks
+#pragma endregion Main Tasks
+
+#pragma region Additional Tasks
+
 bool isPalindrom(string currentTxt);
 void eraseFromTextIfTimesMet(string &currentTxt, char charToErase,
                              int countCondition);
 void countNumericInTxt(string currentTxt);
 
+#pragma endregion Additional Tasks
+
+#pragma region Utils
+
 void swap(char *a, char *b);
 string reversedText(string txt);
-
 void displayAuthor();
+
+#pragma endregion Utils
 
 int main() {
     // from Locales and code pages supported
@@ -69,7 +75,7 @@ int main() {
 
         switch (userInput) {
             case MENU_NEW_TXT:
-                cout <<"| Lūdzu ievadiet jaunu tekstu |\t>>";
+                cout << "| Lūdzu ievadiet jaunu tekstu |\t>>";
 
                 // space cin ir pieņemts kā terminating symbol
                 cin.ignore();
@@ -101,8 +107,10 @@ int main() {
 
             case CHECK_PALINDROM:
                 cout << (isPalindrom(userText) ? "Teksts ir palindroms"
-                                                : "Teksts nav palindroms!")
-                      << endl;
+                                               : "Teksts nav palindroms!")
+                     << endl;
+                cin.ignore();
+                cin.get();
 
                 break;
 
@@ -129,6 +137,8 @@ int main() {
     system("PAUSE");
     return 0;
 }
+
+#pragma region Menu
 
 void displayMenu() {
     cout << right << setfill('-') << setw(MENU_HEADER_LEFT_WIDTH)
@@ -157,49 +167,57 @@ void displayMenu() {
     cout << setfill('-')
          << setw(MENU_HEADER_LEFT_WIDTH + MENU_HEADER_RIGHT_WIDTH) << " "
          << setfill(' ') << endl;
-
     cout << "\n";
 }
 
 void displayMenuRow(int menuNumber, string rowTxt) {
     if (menuNumber >= MENU_AUTHOR && menuNumber <= COUNT_NUMERIC)
         cout << "|\t" << menuNumber << "\t" << left << setw(TEXT_MAIN_WIDTH)
-              << rowTxt << left << setw(MENU_AFTER_TEXT_WIDTH) << "|" << endl;
+             << rowTxt << left << setw(MENU_AFTER_TEXT_WIDTH) << "|" << endl;
     else
         cout << "|\t"
-              << " "
-              << "\t" << left << setw(TEXT_MAIN_WIDTH) << rowTxt << left
-              << setw(MENU_AFTER_TEXT_WIDTH) << "|" << endl;
+             << " "
+             << "\t" << left << setw(TEXT_MAIN_WIDTH) << rowTxt << left
+             << setw(MENU_AFTER_TEXT_WIDTH) << "|" << endl;
 }
+
+#pragma endregion Menu
+
+#pragma region Input Helpers
 
 int getUserMenuInput() {
     int userInput;
-    cout << "| Lūdzu izvēlieties (0, 1, 2, 3, 4, 5, 6)| >> ";
+    cout << "| Lūdzu izvēlieties (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)| >> ";
     cin >> userInput;
 
     while (1) {
-        if (cin.fail() || (userInput < MENU_AUTHOR || userInput > COUNT_NUMERIC)) {
+        if (cin.fail() ||
+            (userInput < MENU_AUTHOR || userInput > COUNT_NUMERIC)) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "| !!! Nav korekta izvēlē! Ievadiet int vērtību no 0 "
-                     "līdz 6 ! |"
-                  << endl;
-            cout << "| Lūdzu izvēlieties (0, 1, 2, 3, 4, 5, 6) |\t>>";
+            cout << "| !!! Nav korekta izvēlē! Ievadiet int vērtību no 0 līdz "
+                    "9 ! |"
+                 << endl;
+            cout << "| Lūdzu izvēlieties (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) |\t>>";
             cin >> userInput;
         }
 
-        if (!cin.fail() && (userInput >= MENU_AUTHOR && userInput <= COUNT_NUMERIC))
+        if (!cin.fail() &&
+            (userInput >= MENU_AUTHOR && userInput <= COUNT_NUMERIC))
             break;
     }
 
     return userInput;
 }
 
+#pragma endregion Input Helpers
+
+#pragma region Main Tasks
 void displayTextIsEvenOrOdd(string currentTxt) {
     if (currentTxt.length() % 2 == 0)
-        cout <<"\n Teksta garums ir pāra skaitlis!" << endl;
+        cout << "\n Teksta garums ir pāra skaitlis!" << endl;
     else
-        cout <<"\n Teksta garums ir nepāra skaitlis!" << endl;
+        cout << "\n Teksta garums ir nepāra skaitlis!" << endl;
 
     cin.ignore();
     cin.get();
@@ -223,14 +241,14 @@ void calcTextLengthFactorial(string currentTxt) {
         factorialProduct *= i;
     }
 
-    cout <<"\n Faktoriāls ir: " << factorialProduct << endl;
+    cout << "\n Faktoriāls ir: " << factorialProduct << endl;
 
     cin.ignore();
     cin.get();
 }
 
 void displayTxtReverse(string currentTxt) {
-    cout <<"\n Teksts reversā: ";
+    cout << "\n Teksts reversā: ";
     for (int i = currentTxt.length() - 1; i >= 0; i--) {
         cout << currentTxt[i];
     }
@@ -240,6 +258,8 @@ void displayTxtReverse(string currentTxt) {
     cin.ignore();
     cin.get();
 }
+
+#pragma endregion Main Tasks
 
 void displayAuthor() {
     cout << "|\t"
@@ -273,14 +293,12 @@ string reversedText(string txt) {
 
 void eraseFromTextIfTimesMet(string &currentTxt, char charToErase,
                              int countCondition) {
-    
     cout << "\n Teksts pašlaik ir: " << currentTxt << endl;
 
     int count = 0;
     string newTxt = "";
 
     for (char c : currentTxt) {
-
         // nezinu, vai ir jaizmanto tolower ??? (bija defineets tikai '')
 
         if (c == charToErase) {
@@ -299,6 +317,9 @@ void eraseFromTextIfTimesMet(string &currentTxt, char charToErase,
     // pārsniedz nozīmē ja ir vairāk par n ? vai n ieslēdzot?
     if (count > countCondition) currentTxt = newTxt;
     cout << "\n Jauns teksts: " << currentTxt << endl;
+
+    cin.ignore();
+    cin.get();
 }
 
 void countNumericInTxt(string currentTxt) {
@@ -310,10 +331,13 @@ void countNumericInTxt(string currentTxt) {
         }
     }
 
-    cout <<"\n Testēts teksts >> " << currentTxt << endl;
-    cout <<"rezultāts: \n" << endl;
+    cout << "\n Testēts teksts >> " << currentTxt << endl;
+    cout << "rezultāts: \n" << endl;
 
     for (int i = 0; i < numericFoundCountArray.size(); i++) {
         cout << i << "  -  " << numericFoundCountArray[i] << 'x' << endl;
     }
+
+    cin.ignore();
+    cin.get();
 }
