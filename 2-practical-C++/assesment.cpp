@@ -6,6 +6,8 @@
 #include <locale>  // setLocale
 #include <string>  // priekš string
 #include <vector>
+#include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -43,6 +45,16 @@ int getUserMenuInput();
 // main tasks
 void initializeVectorFromInput(vector<int> &dataVector);
 
+void queifyVector(vector<int> dataVector); //FIFO
+void printQueue(queue<int> q);
+
+void stackifyVector(vector<int> dataVector); // LIFO
+stack<int> initializeStackFromVector(vector<int> dataVector);
+stack<int> initializeStackFromStack(stack<int> dataStack);
+void printStack(stack<int> stack);
+
+void doubleStackProcess(vector<int> dataVector);
+
 void displayAuthor();
 
 // utils
@@ -68,28 +80,33 @@ int main() {
                 break;
 
             case menuUtils::MENU_QUEUE_PROCESS:
-                cout << "Enter Queue" << endl;
+                
+                queifyVector(initialData);
+
                 cin.ignore();
                 cin.get();
 
                 break;
 
             case menuUtils::MENU_STACK_PROCESS:
-                cout << "Enter Stack" << endl;
+                stackifyVector(initialData);
+
                 cin.ignore();
                 cin.get();
 
                 break;
 
             case menuUtils::MENU_DOUBLE_STACK:
-                cout << "Enter Double Stack" << endl;
+                doubleStackProcess(initialData);
+
                 cin.ignore();
                 cin.get();
 
                 break;
 
             case menuUtils::MENU_DISPLAY_DATA:
-                cout << "Display Data" << endl;
+                displayVectorData(initialData);
+
                 cin.ignore();
                 cin.get();
 
@@ -215,7 +232,75 @@ void initializeVectorFromInput(vector<int> &dataVector) {
 
     } while (!isFinish && !isCancel);
 
+    if (isCancel)
+        dataVector = initialData;
+
     displayVectorData(dataVector);
+}
+
+void queifyVector(vector<int> dataVector) {
+    queue<int> dataQueue;
+
+    cout << "|\t Current data in vector: ";
+    for (std::vector<int>::iterator it = dataVector.begin(); it != dataVector.end(); ++it) {
+        cout << *it << ", ";
+        dataQueue.push(*it);
+    }
+
+    cout << "\n|\t Data from Queue: ";
+    printQueue(dataQueue);
+}
+
+void printQueue(queue<int> q) {
+    while (!q.empty()) {
+        cout << q.front()<<" ";
+        q.pop();
+    }
+    cout << endl;
+}
+
+void stackifyVector(vector<int> dataVector) {
+    stack<int> dataStack = initializeStackFromVector(dataVector);
+    cout << "\n|\t Data from Queue: ";
+    printStack(dataStack);
+}
+
+stack<int> initializeStackFromVector(vector<int> dataVector) {
+    stack<int> stack;
+    cout << "|\t Current data in vector: ";
+    for (std::vector<int>::iterator it = dataVector.begin(); it != dataVector.end(); ++it) {
+        cout << *it << ", ";
+        stack.push(*it);
+    }
+
+    cout << endl;
+
+    return stack;
+}
+
+void printStack(stack<int> stack) {
+    while (!stack.empty()) {
+        cout << stack.top()<<", ";
+        stack.pop();
+    }
+    cout << endl;
+}
+
+stack<int> initializeStackFromStack(stack<int> dataStack) {
+    stack<int> newStack;
+
+    while (!dataStack.empty()) {
+        newStack.push(dataStack.top());
+        dataStack.pop();
+    }
+    
+    return newStack;
+}
+
+void doubleStackProcess(vector<int> dataVector) {
+    stack<int> stack1 = initializeStackFromVector(dataVector);
+    stack<int> stack2 = initializeStackFromStack(stack1);
+    printStack(stack2);
 }
 
 void displayAuthor() {
