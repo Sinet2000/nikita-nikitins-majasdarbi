@@ -6,7 +6,7 @@
 
 using namespace std;
 
-namespace ProgramUtils{
+namespace programUtils {
     
     string getInputInString(string description) {
         string txt;

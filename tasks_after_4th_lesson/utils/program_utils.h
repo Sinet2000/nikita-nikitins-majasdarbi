@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace ProgramUtils {
+namespace programUtils {
 
     std::string getInputInString(std::string txt);
     void displayData(std::string txt);

@@ -79,9 +79,9 @@ MainMenu initializeProgramMenu() {
 // 1.uzd
 // -------------------------------------------------------
 void displayReversedString() {
-    string txt = ProgramUtils::getInputInString("Enter text to reverse");
+    string txt = programUtils::getInputInString("Enter text to reverse");
     reverseStr(txt);
-    ProgramUtils::displayData(txt);
+    programUtils::displayData(txt);
 }
 
 void reverseStr(string &str) {
@@ -103,7 +103,7 @@ void reverseStr(string &str) {
 // -------------------------------------------------------
 void displayNumSumInRecursion() {
     int n = inputValidatorsUtils::getNumericOrCharValidatedInput<int>();
-    ProgramUtils::displayData(countNumbersSumRecursive(n));
+    programUtils::displayData(countNumbersSumRecursive(n));
 }
 
 int countNumbersSumRecursive(int n) {
@@ -134,19 +134,19 @@ void getNDisplayDiffTypeValues() {
 }
 
 void Print(int value) {
-    ProgramUtils::displayData(value);
+    programUtils::displayData(value);
 }
 
 void Print(double value) {
-    ProgramUtils::displayData(value);
+    programUtils::displayData(value);
 }
 
 void Print(string value) {
-    ProgramUtils::displayData(value);
+    programUtils::displayData(value);
 }
 
 void Print(char value) {
-    ProgramUtils::displayData(value);
+    programUtils::displayData(value);
 }
 
 // -------------------------------------------------------
@@ -165,7 +165,7 @@ void getNDisplayMin() {
     double doubleData = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input second value (double) \t: ");
     auto minValue = min<int, double>(intData, doubleData);
 
-    ProgramUtils::displayData(minValue);
+    programUtils::displayData(minValue);
 }
 // -------------------------------------------------------
 
@@ -184,26 +184,26 @@ void initializeCalculator() {
     switch (static_cast<calculatorUtils::calculatorOperations>(operation))
     {
         case calculatorUtils::ADD:
-                ProgramUtils::displayData(firstValue + secondValue);
+                programUtils::displayData(firstValue + secondValue);
             break;
         
         case calculatorUtils::MINUS:
-                ProgramUtils::displayData(firstValue - secondValue);
+                programUtils::displayData(firstValue - secondValue);
             break;
 
         case calculatorUtils::MULTIPLY:
-                ProgramUtils::displayData(firstValue * secondValue);
+                programUtils::displayData(firstValue * secondValue);
             break;
 
         case calculatorUtils::DIVIDE:
                 if(secondValue == 0)
-                    ProgramUtils::displayData("+ infinity");
+                    programUtils::displayData("+ infinity");
                 else
-                    ProgramUtils::displayData(firstValue / secondValue);
+                    programUtils::displayData(firstValue / secondValue);
             break;
 
         default:
-            ProgramUtils::displayData("Operation for entered operator is not found!");
+            programUtils::displayData("Operation for entered operator is not found!");
             break;
     }
 }
