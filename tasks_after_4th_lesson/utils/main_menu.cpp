@@ -28,51 +28,68 @@ MainMenu::MainMenu(void (*initCallback)(int)) {
     globalCallbackPtr = initCallback;
 }
 
-void MainMenu::addItem(std::string title) {
-    menuItems.push_back(new MainMenuItem(title, count));
+void MainMenu::addItem(std::string title, bool isTerminatingItem) {
+    menuItems.push_back(new MainMenuItem(title, count, isTerminatingItem));
 
     count++;
 }
 
-void MainMenu::addItem(std::string title, void (*funcPtr)()) {
-    menuItems.push_back(new MainMenuItem(title, funcPtr, count));
+void MainMenu::addItem(std::string title, void (*funcPtr)(), bool isTerminatingItem) {
+    menuItems.push_back(new MainMenuItem(title, funcPtr, count, isTerminatingItem));
 
     count++;
 }
 
-void MainMenu::displayMenu() {
+void MainMenu::displayMenuAndGetInput() {
     int option = 0;
+    bool terminateProgram = false;
 
-    // Display header
-    std::cout << std::right << std::setfill('-') << std::setw(MenuPaddings::MENU_HEADER_LEFT_WIDTH)
-         << (hasHeader ? header : " ");
-    std::cout << std::setfill('-') << std::left << std::setw(MenuPaddings::MENU_HEADER_RIGHT_WIDTH)
-         << " " << std::setfill(' ') << std::endl;
+    do
+    {
+        displayMenuStyled();
 
-    // Empty row with border (rigt, left)
-    displayMenuRow(0, " ", true);
+        option = getMenuSelectionAndExecute();
 
-    for (int i = 0; i < menuItems.size(); i++)
-        displayMenuRow(i, menuItems[i]->getTitle());
+        terminateProgram = menuItems[option]->getIsTerminatingItem();
 
-    displayMenuRow(0, " ", true);
+    } while (!terminateProgram);
+}
 
-    std::cout << std::setfill('-')
-         << std::setw(MenuPaddings::MENU_HEADER_LEFT_WIDTH +
-                 MenuPaddings::MENU_HEADER_RIGHT_WIDTH)
-         << " " << std::setfill(' ') << std::endl;
-    std::cout << "\n";
-
-    option = InputValidatorsUtils::getUserMenuInput();
+int MainMenu::getMenuSelectionAndExecute() {
+    int option = InputValidatorsUtils::getUserMenuInput();
 
     if (option < 0 && option >= menuItems.size()) {
         std::cout << "Not a valid selection.  Please try again." << std::endl;
-        displayMenu();
     } else {
         menuItems[option]->onEventCallbackPerform();
 
         if (globalCallbackPtr != nullptr) globalCallbackPtr(option);
     }
+
+    return option;
+}
+
+void MainMenu::displayMenuStyled() {
+
+    // Display header
+        std::cout << std::right << std::setfill('-') << std::setw(MenuPaddings::MENU_HEADER_LEFT_WIDTH)
+            << (hasHeader ? header : " ");
+        std::cout << std::setfill('-') << std::left << std::setw(MenuPaddings::MENU_HEADER_RIGHT_WIDTH)
+            << " " << std::setfill(' ') << std::endl;
+
+        // Empty row with border (rigt, left)
+        displayMenuRow(0, " ", true);
+
+        for (int i = 0; i < menuItems.size(); i++)
+            displayMenuRow(i, menuItems[i]->getTitle());
+
+        displayMenuRow(0, " ", true);
+
+        std::cout << std::setfill('-')
+            << std::setw(MenuPaddings::MENU_HEADER_LEFT_WIDTH +
+                    MenuPaddings::MENU_HEADER_RIGHT_WIDTH)
+            << " " << std::setfill(' ') << std::endl;
+        std::cout << "\n";
 }
 
 void MainMenu::displayMenuRow(int menuNumber, std::string rowTxt, bool isDescriptiveRow) {

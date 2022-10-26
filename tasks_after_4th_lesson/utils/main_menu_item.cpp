@@ -2,34 +2,39 @@
 
 MainMenuItem::MainMenuItem() {
 
-    title = "NULL";
+    _title = "NULL";
 }
 
-MainMenuItem::MainMenuItem(std::string initTitle, int initIndex) {
+MainMenuItem::MainMenuItem(std::string initTitle, int initIndex, bool isTerminatingItem) {
 
-    title = initTitle;
-
-    index = initIndex;
+    _title = initTitle;
+    _index = initIndex;
+    _isTerminatingItem = isTerminatingItem;
 }
 
-MainMenuItem::MainMenuItem(std::string initTitle, void(*initEventCallbackPtr)(), int initIndex) {
+MainMenuItem::MainMenuItem(std::string initTitle, void(*initEventCallbackPtr)(), int initIndex, bool isTerminatingItem) {
    
-    title = initTitle;
+    _title = initTitle;
     
     eventCallbackPtr = initEventCallbackPtr;
     
-    index = initIndex;
+    _index = initIndex;
+    _isTerminatingItem = isTerminatingItem;
 }
 
 int MainMenuItem::getIndex() {
-    return index;
+    return _index;
 }
 
 std::string MainMenuItem::getTitle() {
-    return title;
+    return _title;
 }
 
 void MainMenuItem::onEventCallbackPerform() {
     // Perform callback if exists
     if (eventCallbackPtr != nullptr) eventCallbackPtr();
+}
+
+bool MainMenuItem::getIsTerminatingItem() {
+    return _isTerminatingItem;
 }

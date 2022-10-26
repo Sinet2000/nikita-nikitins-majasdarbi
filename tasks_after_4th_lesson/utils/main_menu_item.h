@@ -7,21 +7,24 @@
 
 class MainMenuItem {
    private:
-    std::string title;
-    int index = 0;
+    std::string _title;
+    int _index = 0;
+    bool _isTerminatingItem = false;
     void (*eventCallbackPtr)() = nullptr;
 
    public:
     MainMenuItem(/* args */);
-    MainMenuItem(std::string initTitle, int initIndex);
+    MainMenuItem(std::string initTitle, int initIndex, bool isTerminatingItem = false);
     MainMenuItem(std::string initTitle, void (*initEventCallbackPtr)(),
-                 int initIndex);
+                 int initIndex, bool isTerminatingItem = false);
 
     std::string getTitle();
 
     int getIndex();
 
     void onEventCallbackPerform();
+    
+    bool getIsTerminatingItem();
 };
 
 #endif

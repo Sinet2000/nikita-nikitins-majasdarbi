@@ -25,18 +25,21 @@ class MainMenu {
 
     void (*globalCallbackPtr)(int) = nullptr;
 
+    void displayMenuStyled();
+    int getMenuSelectionAndExecute();
+
+    void displayMenuRow(int menuNumber = 0, std::string rowTxt = " ", bool isDescriptiveRow = false);
+
    public:
     MainMenu();
     MainMenu(std::string);
     MainMenu(void (*)(int));
     MainMenu(std::string, void (*)(int));
 
-    void addItem(std::string);
-    void addItem(std::string, void (*)());
+    void addItem(std::string, bool isTerminatingItem = false);
+    void addItem(std::string, void (*)(), bool isTerminatingItem = false);
 
-    void displayMenu();
-
-    void displayMenuRow(int menuNumber = 0, std::string rowTxt = " ", bool isDescriptiveRow = false);
+    void displayMenuAndGetInput();
 };
 
 #endif

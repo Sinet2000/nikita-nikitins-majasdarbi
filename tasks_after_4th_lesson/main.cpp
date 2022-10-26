@@ -24,8 +24,8 @@ int main(int argc, const char * argv[]) {
     globalAndHeader.addItem("Option 0");
     globalAndHeader.addItem("Option 1", &option1); // You can have global callback and individual callbacks
     globalAndHeader.addItem("Option 2");
-    
-    globalAndHeader.displayMenu();
+    globalAndHeader.addItem("Exit", true);
+    globalAndHeader.displayMenuAndGetInput();
     
     return 0;
 }
