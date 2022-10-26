@@ -6,7 +6,7 @@
 
 using namespace std;
 
-namespace InputValidatorsUtils {
+namespace inputValidatorsUtils {
     
     template<typename T>
     T getNumericOrCharValidatedInput(string text = "| Please enter value |\t>> ") {

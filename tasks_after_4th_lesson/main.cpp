@@ -1,11 +1,23 @@
 #include <iostream>
 #include <string>
 #include <cstdio>
+#include <type_traits>
+
 #include "utils/main_menu.h"
 #include "utils/program_utils.h"
 #include "utils/input_validators.h"
 
 using namespace std;
+
+namespace calculatorUtils {
+
+    enum calculatorOperations {
+        ADD = '+',
+        MINUS = '-',
+        MULTIPLY = '*',
+        DIVIDE = '/'
+    };
+}
 
 // 1.uzd
 void displayReversedString();
@@ -22,6 +34,18 @@ void Print(double value);
 void Print(string value);
 void Print(char value);
 
+// 4.uzd
+// (available since C++11)   https://en.cppreference.com/w/cpp/types/common_type
+template<typename T, typename U>
+typename std::common_type<T, U>::type min(T const& a, U const& b);
+
+void getNDisplayMin();
+
+
+// 5.uzd
+void initializeCalculator();
+
+
 int main(int argc, const char * argv[]) {
     
     // MainMenu globalAndHeader("Tasks after 4th Lesson", &globalCallback);
@@ -30,6 +54,8 @@ int main(int argc, const char * argv[]) {
     mainProgram.addItem("(1.uzd) Reverse string", &displayReversedString);
     mainProgram.addItem("(2.uzd) Sum of 1..n", &displayNumSumInRecursion);
     mainProgram.addItem("(3.uzd) Different data type input and output", &getNDisplayDiffTypeValues);
+    mainProgram.addItem("(4.uzd) Get Minimum", &getNDisplayMin);
+    mainProgram.addItem("(5.uzd) Calculator", &initializeCalculator);
 
     mainProgram.addItem("Exit", true);
     mainProgram.runProgram();
@@ -63,7 +89,7 @@ void reverseStr(string &str) {
 // 2.uzd
 // -------------------------------------------------------
 void displayNumSumInRecursion() {
-    int n = InputValidatorsUtils::getNumericOrCharValidatedInput<int>();
+    int n = inputValidatorsUtils::getNumericOrCharValidatedInput<int>();
     ProgramUtils::displayData(countNumbersSumRecursive(n));
 }
 
@@ -77,13 +103,13 @@ int countNumbersSumRecursive(int n) {
 // 3.uzd
 // -------------------------------------------------------
 void getNDisplayDiffTypeValues() {
-    int intData = InputValidatorsUtils::getNumericOrCharValidatedInput<int>("| Input int value \t: ");
+    int intData = inputValidatorsUtils::getNumericOrCharValidatedInput<int>("| Input int value \t: ");
     Print(intData);
     
-    double doubleData = InputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input double type value \t: ");
+    double doubleData = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input double type value \t: ");
     Print(doubleData);
 
-    char charData = InputValidatorsUtils::getNumericOrCharValidatedInput<char>("| Input char type value \t: ");
+    char charData = inputValidatorsUtils::getNumericOrCharValidatedInput<char>("| Input char type value \t: ");
     Print(charData);
 
     string stringData;
@@ -111,3 +137,62 @@ void Print(char value) {
 }
 
 // -------------------------------------------------------
+
+// 4.uzd
+// -------------------------------------------------------
+
+template<typename T, typename U>
+typename std::common_type<T, U>::type min(T const& a, U const& b) {
+    return (a < b) ? a : b;
+}
+
+void getNDisplayMin() {
+    int intData = inputValidatorsUtils::getNumericOrCharValidatedInput<int>("| Input first value (int) \t: ");
+    
+    double doubleData = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input second value (double) \t: ");
+    auto minValue = min<int, double>(intData, doubleData);
+
+    ProgramUtils::displayData(minValue);
+}
+// -------------------------------------------------------
+
+
+// 5.uzd
+// ------------------------------------------------------------------------------------------------------
+
+void initializeCalculator() {
+    
+    double firstValue = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input first value \t: ");
+    char operation = inputValidatorsUtils::getNumericOrCharValidatedInput<char>("| Enter operation (+, -, /, *) \t: ");
+    double secondValue = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input second value \t: ");
+
+    double result = 0;
+
+    switch (static_cast<calculatorUtils::calculatorOperations>(operation))
+    {
+        case calculatorUtils::ADD:
+                ProgramUtils::displayData(firstValue + secondValue);
+            break;
+        
+        case calculatorUtils::MINUS:
+                ProgramUtils::displayData(firstValue - secondValue);
+            break;
+
+        case calculatorUtils::MULTIPLY:
+                ProgramUtils::displayData(firstValue * secondValue);
+            break;
+
+        case calculatorUtils::DIVIDE:
+                if(secondValue == 0)
+                    ProgramUtils::displayData("+ infinity");
+                else
+                    ProgramUtils::displayData(firstValue / secondValue);
+            break;
+
+        default:
+            ProgramUtils::displayData("Operation for entered operator is not found!");
+            break;
+    }
+}
+
+// -------------------------------------------------------------------------------------------------

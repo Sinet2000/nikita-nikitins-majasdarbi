@@ -57,7 +57,7 @@ void MainMenu::runProgram() {
 }
 
 int MainMenu::getMenuSelectionAndExecute() {
-    int option = InputValidatorsUtils::getNumericOrCharValidatedInput<int>();
+    int option = inputValidatorsUtils::getNumericOrCharValidatedInput<int>();
 
     if (option < 0 || option >= menuItems.size()) {
         std::cout << "Not a valid selection.  Please try again." << std::endl;
