@@ -1,31 +1,46 @@
 #include <iostream>
+#include <string>
+#include <cstdio>
 #include "utils/main_menu.h"
+#include "utils/program_utils.h"
 
-void globalCallback(int option) {
-    std::cout << "Global Callback | Selection: " << option << std::endl;
-}
+using namespace std;
 
-void option0() {
-    std::cout << "Item Callback | Selected option 0" << std::endl;
-}
-
-void option1() {
-    std::cout << "Item Callback | Selected option 1" << std::endl;
-}
-
-void option2() {
-    std::cout << "Item Callback | Selected option 2" << std::endl;
-}
+// 1.uzd
+void displayReversedString();
+void reverseStr(std::string &str);
 
 int main(int argc, const char * argv[]) {
     
-    MainMenu globalAndHeader("Tasks after 4th Lesson", &globalCallback);
-    
-    globalAndHeader.addItem("Option 0");
-    globalAndHeader.addItem("Option 1", &option1); // You can have global callback and individual callbacks
-    globalAndHeader.addItem("Option 2");
-    globalAndHeader.addItem("Exit", true);
-    globalAndHeader.displayMenuAndGetInput();
+    // MainMenu globalAndHeader("Tasks after 4th Lesson", &globalCallback);
+    MainMenu mainProgram("Tasks after 4th Lesson");
+
+    mainProgram.addItem("(1.uzd) Reverse string", &displayReversedString);
+    mainProgram.addItem("(2.uzd) Reverse string", &displayReversedString);
+
+    mainProgram.addItem("Exit", true);
+    mainProgram.runProgram();
     
     return 0;
+}
+
+
+void displayReversedString() {
+    string txt = ProgramUtils::getInputInString("Enter text to reverse");
+    reverseStr(txt);
+    ProgramUtils::displayString(txt);
+}
+
+void reverseStr(string &str) {
+    int txtLength = str.length();
+    int rightSideCharIndex = txtLength-1;
+    int leftSideCharIndex = 0;
+
+    while(leftSideCharIndex <= rightSideCharIndex) {
+
+        swap(str[leftSideCharIndex], str[rightSideCharIndex]);
+
+        leftSideCharIndex++;
+        rightSideCharIndex--;
+    }
 }

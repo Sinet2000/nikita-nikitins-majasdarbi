@@ -40,7 +40,7 @@ void MainMenu::addItem(std::string title, void (*funcPtr)(), bool isTerminatingI
     count++;
 }
 
-void MainMenu::displayMenuAndGetInput() {
+void MainMenu::runProgram() {
     int option = 0;
     bool terminateProgram = false;
 

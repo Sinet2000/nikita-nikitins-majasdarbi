@@ -39,7 +39,7 @@ class MainMenu {
     void addItem(std::string, bool isTerminatingItem = false);
     void addItem(std::string, void (*)(), bool isTerminatingItem = false);
 
-    void displayMenuAndGetInput();
+    void runProgram();
 };
 
 #endif
