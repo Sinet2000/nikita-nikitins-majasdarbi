@@ -1,4 +1,5 @@
 #include "main_menu.h"
+#include "input_validators.h"
 
 #include <stdio.h>
 
@@ -49,9 +50,7 @@ void MainMenu::displayMenu() {
     for (int i = 0; i < menuItems.size(); i++)
         std::cout << i << ".) " << menuItems[i]->getTitle() << std::endl;
 
-    // Prompt user for selection
-    std::cout << "\nSelect option: ";
-    std::cin >> option;
+    option = InputValidatorsUtils::getUserMenuInput();
 
     // Check if selection is valid
     if (option < 0 && option >= menuItems.size()) {
