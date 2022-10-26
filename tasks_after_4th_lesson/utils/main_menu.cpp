@@ -50,15 +50,16 @@ void MainMenu::runProgram() {
 
         option = getMenuSelectionAndExecute();
 
-        terminateProgram = menuItems[option]->getIsTerminatingItem();
+        if (option > -1 && option < menuItems.size())
+            terminateProgram = menuItems[option]->getIsTerminatingItem();
 
     } while (!terminateProgram);
 }
 
 int MainMenu::getMenuSelectionAndExecute() {
-    int option = InputValidatorsUtils::getUserMenuInput();
+    int option = InputValidatorsUtils::getNumericOrCharValidatedInput<int>();
 
-    if (option < 0 && option >= menuItems.size()) {
+    if (option < 0 || option >= menuItems.size()) {
         std::cout << "Not a valid selection.  Please try again." << std::endl;
     } else {
         menuItems[option]->onEventCallbackPerform();
