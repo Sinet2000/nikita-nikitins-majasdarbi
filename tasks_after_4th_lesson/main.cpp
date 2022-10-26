@@ -19,6 +19,8 @@ namespace calculatorUtils {
     };
 }
 
+MainMenu initializeProgramMenu();
+
 // 1.uzd
 void displayReversedString();
 void reverseStr(std::string &str);
@@ -46,9 +48,20 @@ void getNDisplayMin();
 void initializeCalculator();
 
 
+// -----------------------------------------  ***** MAIN PROGRAM  **** -------------------------------------------------------------------
+
 int main(int argc, const char * argv[]) {
     
-    // MainMenu globalAndHeader("Tasks after 4th Lesson", &globalCallback);
+    MainMenu mainProgram = initializeProgramMenu();
+    mainProgram.runProgram();
+    
+    return 0;
+}
+
+// -------------------------------------------------------------------------------------------------------------------------------------
+
+
+MainMenu initializeProgramMenu() {
     MainMenu mainProgram("Tasks after 4th Lesson");
 
     mainProgram.addItem("(1.uzd) Reverse string", &displayReversedString);
@@ -58,10 +71,10 @@ int main(int argc, const char * argv[]) {
     mainProgram.addItem("(5.uzd) Calculator", &initializeCalculator);
 
     mainProgram.addItem("Exit", true);
-    mainProgram.runProgram();
-    
-    return 0;
+
+    return mainProgram;
 }
+
 
 // 1.uzd
 // -------------------------------------------------------
