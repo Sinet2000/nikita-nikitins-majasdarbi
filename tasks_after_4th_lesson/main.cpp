@@ -19,7 +19,7 @@ void option2() {
 
 int main(int argc, const char * argv[]) {
     
-    MainMenu globalAndHeader("Selection an option:", &globalCallback);
+    MainMenu globalAndHeader("Tasks after 4th Lesson", &globalCallback);
     
     globalAndHeader.addItem("Option 0");
     globalAndHeader.addItem("Option 1", &option1); // You can have global callback and individual callbacks

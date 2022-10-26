@@ -1,11 +1,10 @@
 #include "input_validators.h"
 #include <iostream>
 #include <limits>
-#include <string>
 
-namespace InputValidatorsUtils
-{
-    int getUserMenuInput(std::string text = "| Please select |\t>> ") {
+namespace InputValidatorsUtils{
+    
+    int getUserMenuInput(std::string text) {
 
         int userInput;
         std::cout << "| Please select |\t>> ";

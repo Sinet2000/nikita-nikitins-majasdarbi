@@ -2,6 +2,8 @@
 #include "input_validators.h"
 
 #include <stdio.h>
+#include <string>
+#include <iomanip>
 
 #include <iostream>
 
@@ -38,30 +40,52 @@ void MainMenu::addItem(std::string title, void (*funcPtr)()) {
     count++;
 }
 
-// Print MainMenu and allow for selection
 void MainMenu::displayMenu() {
-    // Initialize option
     int option = 0;
 
-    // Print MainMenu header if supplied
-    if (hasHeader) std::cout << header << "\n" << std::endl;
+    // Display header
+    std::cout << std::right << std::setfill('-') << std::setw(MenuPaddings::MENU_HEADER_LEFT_WIDTH)
+         << (hasHeader ? header : " ");
+    std::cout << std::setfill('-') << std::left << std::setw(MenuPaddings::MENU_HEADER_RIGHT_WIDTH)
+         << " " << std::setfill(' ') << std::endl;
 
-    // Enumerate in print options
+    // Empty row with border (rigt, left)
+    displayMenuRow(0, " ", true);
+
     for (int i = 0; i < menuItems.size(); i++)
-        std::cout << i << ".) " << menuItems[i]->getTitle() << std::endl;
+        displayMenuRow(i, menuItems[i]->getTitle());
+
+    displayMenuRow(0, " ", true);
+
+    std::cout << std::setfill('-')
+         << std::setw(MenuPaddings::MENU_HEADER_LEFT_WIDTH +
+                 MenuPaddings::MENU_HEADER_RIGHT_WIDTH)
+         << " " << std::setfill(' ') << std::endl;
+    std::cout << "\n";
 
     option = InputValidatorsUtils::getUserMenuInput();
 
-    // Check if selection is valid
     if (option < 0 && option >= menuItems.size()) {
-        // Print selection invalid and print MainMenu again
         std::cout << "Not a valid selection.  Please try again." << std::endl;
         displayMenu();
     } else {
-        // Call MainMenu item's callback
         menuItems[option]->onEventCallbackPerform();
 
-        // If global callback supplied, call that with index as parameter
         if (globalCallbackPtr != nullptr) globalCallbackPtr(option);
+    }
+}
+
+void MainMenu::displayMenuRow(int menuNumber, std::string rowTxt, bool isDescriptiveRow) {
+
+    if (!isDescriptiveRow) {
+        std::cout << "|\t" << menuNumber << "\t" << std::left
+             << std::setw(MenuPaddings::TEXT_MAIN_WIDTH) << rowTxt << std::left
+             << std::setw(MenuPaddings::MENU_AFTER_TEXT_WIDTH) << "|" << std::endl;
+    } 
+    else {
+        std::cout << "|\t"
+             << " "
+             << "\t" << std::left << std::setw(MenuPaddings::TEXT_MAIN_WIDTH) << rowTxt
+             << std::left << std::setw(MenuPaddings::MENU_AFTER_TEXT_WIDTH) << "|" << std::endl;
     }
 }
