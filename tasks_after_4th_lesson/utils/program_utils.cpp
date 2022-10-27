@@ -1,4 +1,5 @@
 #include "program_utils.h"
+#include <cstring>
 #include <iostream>
 #include <string>
 #include <limits>
@@ -16,6 +17,17 @@ namespace programUtils {
         getline(cin, txt);
 
         return txt;
+    }
+
+    char* getInputInCharArray(string description) {
+        string inputTxt = getInputInString(description);
+        int n = inputTxt.length();
+
+        char char_array[n + 1];
+    
+        strcpy(char_array, inputTxt.c_str());
+
+        return char_array;
     }
 
     void displayData(string txt) {
@@ -38,6 +50,17 @@ namespace programUtils {
         ss >> dataInString;
         
         displayData(dataInString);
+    }
+
+    void displayData(char *data) {
+        const int len = sizeof(data) / sizeof(data[0]); // or strlen ?
+        string dataToDisplay;
+
+        for(int i = 0; i<len; i++) {
+            dataToDisplay+=data[i];
+        }  
+
+        displayData(dataToDisplay);
     }
 
     void swap(char *a, char *b) {

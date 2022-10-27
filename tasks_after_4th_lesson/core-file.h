@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 #include "../utils/program_utils.h"
 #include "../utils/input_validators.h"
 

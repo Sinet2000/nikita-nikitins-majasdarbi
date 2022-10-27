@@ -14,6 +14,10 @@
 #include "main-tasks/fourth-task.h"
 #include "main-tasks/fifth-task.h"
 
+
+// Additional Tasks
+#include "additional-tasks/first-addit.h"
+
 using namespace std;
 
 MainMenu initializeProgramMenu();
@@ -39,6 +43,7 @@ MainMenu initializeProgramMenu() {
     mainProgram.addItem("(3.uzd) Different data type input and output", &mainTasks::getNDisplayDiffTypeValues);
     mainProgram.addItem("(4.uzd) Get Minimum", &mainTasks::getNDisplayMin);
     mainProgram.addItem("(5.uzd) Calculator", &mainTasks::initializeCalculator);
+    mainProgram.addItem("(6.uzd) Display Reversed Char Arr", &additionalTasks::displayReversedCharArr);
 
     mainProgram.addItem("Exit", true);
 
