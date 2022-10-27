@@ -1,3 +1,6 @@
+#ifndef input_validators_h
+#define input_validators_h
+
 #include <iostream>
 #include <limits>
 #include <string>
@@ -31,3 +34,5 @@ namespace inputValidatorsUtils {
         return userInput;
     }
 } 
+
+#endif
