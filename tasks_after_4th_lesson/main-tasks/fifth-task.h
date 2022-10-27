@@ -1,47 +1,49 @@
 #ifndef fifth_task_h
 #define fifth_task_h
 
-#include "core-file.h"
+#include "../core-file.h"
 #include "enums/calculator-utils.h"
 
 using namespace std;
 
-
-void initializeCalculator();
-
-
-void initializeCalculator() {
+namespace mainTasks {
     
-    double firstValue = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input first value \t: ");
-    char operation = inputValidatorsUtils::getNumericOrCharValidatedInput<char>("| Enter operation (+, -, /, *) \t: ");
-    double secondValue = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input second value \t: ");
+    void initializeCalculator();
 
-    double result = 0;
 
-    switch (static_cast<calculatorUtils::calculatorOperations>(operation))
-    {
-        case calculatorUtils::ADD:
-                programUtils::displayData(firstValue + secondValue);
-            break;
+    void initializeCalculator() {
         
-        case calculatorUtils::MINUS:
-                programUtils::displayData(firstValue - secondValue);
-            break;
+        double firstValue = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input first value \t: ");
+        char operation = inputValidatorsUtils::getNumericOrCharValidatedInput<char>("| Enter operation (+, -, /, *) \t: ");
+        double secondValue = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input second value \t: ");
 
-        case calculatorUtils::MULTIPLY:
-                programUtils::displayData(firstValue * secondValue);
-            break;
+        double result = 0;
 
-        case calculatorUtils::DIVIDE:
-                if(secondValue == 0)
-                    programUtils::displayData("+ infinity");
-                else
-                    programUtils::displayData(firstValue / secondValue);
-            break;
+        switch (static_cast<calculatorUtils::calculatorOperations>(operation))
+        {
+            case calculatorUtils::ADD:
+                    programUtils::displayData(firstValue + secondValue);
+                break;
+            
+            case calculatorUtils::MINUS:
+                    programUtils::displayData(firstValue - secondValue);
+                break;
 
-        default:
-            programUtils::displayData("Operation for entered operator is not found!");
-            break;
+            case calculatorUtils::MULTIPLY:
+                    programUtils::displayData(firstValue * secondValue);
+                break;
+
+            case calculatorUtils::DIVIDE:
+                    if(secondValue == 0)
+                        programUtils::displayData("+ infinity");
+                    else
+                        programUtils::displayData(firstValue / secondValue);
+                break;
+
+            default:
+                programUtils::displayData("Operation for entered operator is not found!");
+                break;
+        }
     }
 }
 

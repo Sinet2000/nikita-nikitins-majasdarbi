@@ -18,11 +18,6 @@ using namespace std;
 
 MainMenu initializeProgramMenu();
 
-// Additional tasks
-// 1
-// 1.1
-string reverseStrIterator(std::string &str);
-
 // -----------------------------------------  ***** MAIN PROGRAM  **** -------------------------------------------------------------------
 
 int main(int argc, const char * argv[]) {
@@ -39,28 +34,13 @@ int main(int argc, const char * argv[]) {
 MainMenu initializeProgramMenu() {
     MainMenu mainProgram("Tasks after 4th Lesson");
 
-    mainProgram.addItem("(1.uzd) Reverse string", &displayReversedString);
-    mainProgram.addItem("(2.uzd) Sum of 1..n", &displayNumSumInRecursion);
-    mainProgram.addItem("(3.uzd) Different data type input and output", &getNDisplayDiffTypeValues);
-    mainProgram.addItem("(4.uzd) Get Minimum", &getNDisplayMin);
-    mainProgram.addItem("(5.uzd) Calculator", &initializeCalculator);
+    mainProgram.addItem("(1.uzd) Reverse string", &mainTasks::displayReversedString);
+    mainProgram.addItem("(2.uzd) Sum of 1..n", &mainTasks::displayNumSumInRecursion);
+    mainProgram.addItem("(3.uzd) Different data type input and output", &mainTasks::getNDisplayDiffTypeValues);
+    mainProgram.addItem("(4.uzd) Get Minimum", &mainTasks::getNDisplayMin);
+    mainProgram.addItem("(5.uzd) Calculator", &mainTasks::initializeCalculator);
 
     mainProgram.addItem("Exit", true);
 
     return mainProgram;
-}
-
-// ---------------------------------****  Additional Tasks  *****--------------------------------------------
-// 1.1
-string reverseStrIterator(std::string &str) {
-    string reversedStr;
-
-    // crbegin - returns a read only reverse iterator  that points to the last char
-    // string:: iterator it;
-    string::const_reverse_iterator strIterator = str.crbegin();
-    while(strIterator != str.crend()) {
-        reversedStr.append(1, *(strIterator++));
-    }
-
-    return reversedStr;
 }
