@@ -36,14 +36,8 @@ int main(int argc, const char * argv[]) {
 
 
 MainMenu initializeProgramMenu() {
-    MainMenu mainProgram("Tasks after 4th Lesson");
+    MainMenu mainProgram("Tasks after nth Lesson");
 
-    mainProgram.addItem("(1-additional.uzd) ", &additionalTasks::taskMenuRunner);
-    mainProgram.addItem("(1.uzd) Reverse string", &mainTasks::displayReversedString);
-    mainProgram.addItem("(2.uzd) Sum of 1..n", &mainTasks::displayNumSumInRecursion);
-    mainProgram.addItem("(3.uzd) Different data type input and output", &mainTasks::getNDisplayDiffTypeValues);
-    mainProgram.addItem("(4.uzd) Get Minimum", &mainTasks::getNDisplayMin);
-    mainProgram.addItem("(5.uzd) Calculator", &mainTasks::initializeCalculator);
 
     mainProgram.addItem("Exit", true);
 
