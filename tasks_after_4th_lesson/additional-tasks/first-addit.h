@@ -18,7 +18,9 @@ namespace additionalTasks
     }
 
     void displayReversedCharArr() {
-        char *txt = programUtils::getInputInCharArray("Enter text to reverse");
+        int maxTxtLength = 255;
+        char txt[maxTxtLength];
+        programUtils::getInputInCharArray("Enter text to reverse", txt, maxTxtLength);
         reverseStr(txt);
         
         programUtils::displayData(txt);
@@ -37,7 +39,7 @@ namespace additionalTasks
     }
 
     void reverseStr(char *charArray) {
-        const int len = sizeof(charArray) / sizeof(charArray[0]); // or strlen ?
+        const int len = strlen(charArray); // or strlen ?
         
         for(int i = 0; i<len/2; i++) {
             std::swap(charArray[i], charArray[len-i-1]); 

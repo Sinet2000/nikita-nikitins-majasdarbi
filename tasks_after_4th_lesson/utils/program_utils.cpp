@@ -19,15 +19,10 @@ namespace programUtils {
         return txt;
     }
 
-    char* getInputInCharArray(string description) {
-        string inputTxt = getInputInString(description);
-        int n = inputTxt.length();
-
-        char char_array[n + 1];
-    
-        strcpy(char_array, inputTxt.c_str());
-
-        return char_array;
+    void getInputInCharArray(string description, char *charArray, int length) {
+        cout << "\n| " << description << " |\t>>";
+        cin.ignore();
+        cin.getline(charArray, length);
     }
 
     void displayData(string txt) {
