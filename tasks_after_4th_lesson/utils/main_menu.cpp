@@ -40,6 +40,51 @@ void MainMenu::addItem(std::string title, void (*funcPtr)(), bool isTerminatingI
     count++;
 }
 
+void MainMenu::addItem(std::string title, void (*funcPtr)(int & number), int & eventParam, bool isTerminatingItem) {
+    menuItems.push_back(new MainMenuItem(title, funcPtr, eventParam, count, isTerminatingItem));
+
+    count++;
+}
+
+void MainMenu::addItem(std::string title, void (*funcPtr)(std::string & callbackParamType, bool & boolParamType), std::string & eventParam, bool & boolParam, bool isTerminatingItem) {
+    menuItems.push_back(new MainMenuItem(title, funcPtr, eventParam, boolParam, count, isTerminatingItem));
+
+    count++;
+}
+
+void MainMenu::addItem(std::string title, void (*funcPtr)(std::string & callbackParamType), std::string & eventParam, bool isTerminatingItem) {
+    menuItems.push_back(new MainMenuItem(title, funcPtr, eventParam, count, isTerminatingItem));
+
+    count++;
+}
+
+void MainMenu::addItem(std::string title, void (*funcPtr)(char * callbackParamType), char * eventParam, bool isTerminatingItem) {
+    menuItems.push_back(new MainMenuItem(title, funcPtr, eventParam, count, isTerminatingItem));
+
+    count++;
+}
+
+void MainMenu::addItem(std::string title, void (*funcPtr)(char * callbackParamType, bool & boolParamType), char * eventParam, bool & boolParam, bool isTerminatingItem) {
+    menuItems.push_back(new MainMenuItem(title, funcPtr, eventParam, boolParam, count, isTerminatingItem));
+
+    count++;
+}
+
+void MainMenu::addItem(std::string title, void (*funcPtr)(char * callbackParamCharType, std::string & callbackParamStringType, bool & boolParamType), char * eventParamChar, std::string & eventParamString, bool & boolParam, bool isTerminatingItem) {
+    menuItems.push_back(new MainMenuItem(title, funcPtr, eventParamChar, eventParamString, boolParam, count, isTerminatingItem));
+
+    count++;
+}
+
+// void MainMenu::addItem(std::string title, void (MainMenuRunner::*funcPtr)(), bool isTerminatingItem) {
+//     cout <<"title menuRunner: " << title <<endl;
+//     cout << funcPtr <<endl;
+
+//     menuItems.push_back(new MainMenuItem(title, funcPtr, count, isTerminatingItem));
+
+//     count++;
+// }
+
 void MainMenu::runProgram() {
     int option = 0;
     bool terminateProgram = false;

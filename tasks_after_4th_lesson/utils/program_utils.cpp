@@ -48,7 +48,7 @@ namespace programUtils {
     }
 
     void displayData(char *data) {
-        const int len = sizeof(data) / sizeof(data[0]); // or strlen ?
+        const int len = strlen(data);
         string dataToDisplay;
 
         for(int i = 0; i<len; i++) {

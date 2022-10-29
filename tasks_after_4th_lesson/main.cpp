@@ -14,13 +14,21 @@
 #include "main-tasks/fourth-task.h"
 #include "main-tasks/fifth-task.h"
 
-
 // Additional Tasks
 #include "additional-tasks/first-addit.h"
+
+
+#if __cplusplus <= 199711L
+  #error This file needs at least a C++11 compliant compiler, try using:
+  #error    $ g++ -std=c++11 ..
+#endif
 
 using namespace std;
 
 MainMenu initializeProgramMenu();
+
+// void initAndRunFirstAdditionalTask();
+
 
 // -----------------------------------------  ***** MAIN PROGRAM  **** -------------------------------------------------------------------
 
@@ -49,3 +57,8 @@ MainMenu initializeProgramMenu() {
 
     return mainProgram;
 }
+
+// void initAndRunFirstAdditionalTask() {
+//     additionalTasks::FirstAdditionalTaskAdapter taskRunner;
+//     taskRunner.initAndRunApp();
+// }
