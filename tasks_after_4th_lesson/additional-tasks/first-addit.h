@@ -5,15 +5,11 @@
 
 namespace additionalTasks {
 
-void displayReversedString();
-void displayReversedCharArr();
-void reverseStr(std::string &str);
-void reverseStr(char *charArray);
-
+// main chunks
 void getInputToCharArr(char * txt, bool & isStringDataLastAdded);
 void getInputToString(string &txtData, bool & isStringDataLastAdded);
-
-void displayString();
+void displayReversedStandardCurrentData(char *charArray, string &str, bool & isStringDataLastAdded);
+void displayReversedWithIteratorsCurrentData(char *charArray, string &str, bool & isStringDataLastAdded);
 void displayCurrentStateStringOrCharArrayData(char *charArray, string &str, bool & isStringDataLastAdded);
 
 void taskMenuRunner() {
@@ -27,6 +23,10 @@ void taskMenuRunner() {
 
     mainProgram1.addItem("Enter char array", &additionalTasks::getInputToCharArr, _txtArrayMain, isStringDataLastAdded);
 
+    mainProgram1.addItem("Standard Reverse", &additionalTasks::displayReversedStandardCurrentData, _txtArrayMain, _txtStringMain, isStringDataLastAdded);
+
+    mainProgram1.addItem("Iterators Reverse", &additionalTasks::displayReversedWithIteratorsCurrentData, _txtArrayMain, _txtStringMain, isStringDataLastAdded);
+
     mainProgram1.addItem("Display data", &additionalTasks::displayCurrentStateStringOrCharArrayData , _txtArrayMain, _txtStringMain, isStringDataLastAdded);
 
     mainProgram1.addItem("Exit", true);
@@ -35,43 +35,8 @@ void taskMenuRunner() {
 }
 
 
-
-
-void displayReversedString() {
-    string txt = programUtils::getInputInString("Enter text to reverse");
-    reverseStr(txt);
-
-    programUtils::displayData(txt);
-}
-
-void displayReversedCharArr(int maxTxtLength) {
-    char txt[maxTxtLength];
-    programUtils::getInputInCharArray("Enter text to reverse", txt, maxTxtLength);
-    reverseStr(txt);
-
-    programUtils::displayData(txt);
-}
-
-void reverseStr(std::string &str) {
-    string initialString = str;
-    str.clear();
-
-    // crbegin - returns a read only reverse iterator  that points to the last
-    // char string:: iterator it;
-    string::const_reverse_iterator strIterator = initialString.crbegin();
-    while (strIterator != str.crend()) {
-        str.append(1, *(strIterator++));
-    }
-}
-
-void reverseStr(char *charArray) {
-    const int len = strlen(charArray);
-
-    for (int i = 0; i < len / 2; i++) {
-        std::swap(charArray[i], charArray[len - i - 1]);
-    }
-}
-
+// main
+// ********************************************************************************************************************************************************
 void getInputToString(string &txtData, bool & isStringDataLastAdded) {
     isStringDataLastAdded = true;
     txtData = programUtils::getInputInString("Enter string");
@@ -84,7 +49,23 @@ void getInputToCharArr(char * txt, bool & isStringDataLastAdded) {
     programUtils::displayData(txt);
 }
 
-void displayString(string &txtData) { programUtils::displayData(txtData); }
+void displayReversedStandardCurrentData(char *charArray, string &str, bool & isStringDataLastAdded) {
+    cout << "isStringDataLastAdded" << isStringDataLastAdded << endl;
+    if (isStringDataLastAdded) {
+        StringUtils::reverseStrAndDisplay(str);
+    } else {
+        StringUtils::reverseCharArrayAndDisplay(charArray);
+    }
+}
+
+void displayReversedWithIteratorsCurrentData(char *charArray, string &str, bool &isStringDataLastAdded) {
+    if (isStringDataLastAdded) {
+        StringUtils::reverseStrAndDisplay(str, true);
+    } else {
+        // iterators for [] ??, there is only re
+        StringUtils::reverseCharArrayAndDisplay(charArray, true);
+    }
+}
 
 void displayCurrentStateStringOrCharArrayData(char *charArray, string &str, bool &isStringDataLastAdded) {
     programUtils::displayData((isStringDataLastAdded ? str : charArray));

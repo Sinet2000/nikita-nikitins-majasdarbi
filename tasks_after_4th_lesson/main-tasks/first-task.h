@@ -18,17 +18,7 @@ namespace mainTasks {
     }
 
     void reverseStr(string &str) {
-        int txtLength = str.length();
-        int rightSideCharIndex = txtLength-1;
-        int leftSideCharIndex = 0;
-
-        while(leftSideCharIndex <= rightSideCharIndex) {
-
-            std::swap(str[leftSideCharIndex], str[rightSideCharIndex]);
-
-            leftSideCharIndex++;
-            rightSideCharIndex--;
-        }
+        StringUtils::reverseStr(str);
     }
 } // namespace mainTasks
 
