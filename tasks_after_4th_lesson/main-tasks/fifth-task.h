@@ -22,26 +22,26 @@ namespace mainTasks {
         switch (static_cast<calculatorUtils::calculatorOperations>(operation))
         {
             case calculatorUtils::ADD:
-                    programUtils::displayData(firstValue + secondValue);
+                    programUtils::Print(firstValue + secondValue);
                 break;
             
             case calculatorUtils::MINUS:
-                    programUtils::displayData(firstValue - secondValue);
+                    programUtils::Print(firstValue - secondValue);
                 break;
 
             case calculatorUtils::MULTIPLY:
-                    programUtils::displayData(firstValue * secondValue);
+                    programUtils::Print(firstValue * secondValue);
                 break;
 
             case calculatorUtils::DIVIDE:
                     if(secondValue == 0)
-                        programUtils::displayData("+ infinity");
+                        programUtils::Print("+ infinity");
                     else
-                        programUtils::displayData(firstValue / secondValue);
+                        programUtils::Print(firstValue / secondValue);
                 break;
 
             default:
-                programUtils::displayData("Operation for entered operator is not found!");
+                programUtils::Print("Operation for entered operator is not found!");
                 break;
         }
     }

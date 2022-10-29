@@ -14,7 +14,7 @@ namespace mainTasks {
         string txt = programUtils::getInputInString("Enter text to reverse");
         reverseStr(txt);
         
-        programUtils::displayData(txt);
+        programUtils::Print(txt);
     }
 
     void reverseStr(string &str) {

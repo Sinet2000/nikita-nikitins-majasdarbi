@@ -25,29 +25,29 @@ namespace programUtils {
         cin.getline(charArray, length);
     }
 
-    void displayData(string txt) {
+    void Print(string txt) {
         cout << "\n| Result:\t" << txt << endl;
         cin.get();
     }
 
-    void displayData(int data) {
-        displayData(to_string(data));
+    void Print(int data) {
+        Print(to_string(data));
     }
 
-    void displayData(double data) {
-        displayData(to_string(data));
+    void Print(double data) {
+        Print(to_string(data));
     }
 
-    void displayData(char data) {
+    void Print(char data) {
         stringstream ss;
         ss << data;
         string dataInString;
         ss >> dataInString;
         
-        displayData(dataInString);
+        Print(dataInString);
     }
 
-    void displayData(char *data) {
+    void Print(char *data) {
         const int len = strlen(data);
         string dataToDisplay;
 
@@ -55,8 +55,32 @@ namespace programUtils {
             dataToDisplay+=data[i];
         }  
 
-        displayData(dataToDisplay);
+        Print(dataToDisplay);
     }
+
+    void Print(std::vector<char> vectorData) {
+            for (std::vector<char>::iterator it = vectorData.begin(); it != vectorData.end(); ++it) {
+            cout << *it;
+        }
+    }
+
+    void Print(std::stack<char> stackData) {
+        while (!stackData.empty()) {
+            cout << stackData.top()<<", ";
+            stackData.pop();
+        }
+        cout << endl;
+    }
+
+    void Print(std::queue<char> q) {
+        while (!q.empty()) {
+            cout << q.front()<<" ";
+            q.pop();
+        }
+        cout << endl;
+    }
+
+    void swap(char *a, char *b);
 
     void swap(char *a, char *b) {
         char temp = *a;

@@ -8,43 +8,23 @@ using namespace std;
 namespace mainTasks {
 
     void getNDisplayDiffTypeValues();
-    void Print(int value);
-    void Print(double value);
-    void Print(string value);
-    void Print(char value);
 
     void getNDisplayDiffTypeValues() {
         int intData = inputValidatorsUtils::getNumericOrCharValidatedInput<int>("| Input int value \t: ");
-        Print(intData);
+        programUtils::Print(intData);
         
         double doubleData = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input double type value \t: ");
-        Print(doubleData);
+        programUtils::Print(doubleData);
 
         char charData = inputValidatorsUtils::getNumericOrCharValidatedInput<char>("| Input char type value \t: ");
-        Print(charData);
+        programUtils::Print(charData);
 
         string stringData;
         cout << "| Input string type value \t: ";
         cin.ignore();
         getline(cin, stringData);
         
-        Print(stringData);
-    }
-
-    void Print(int value) {
-        programUtils::displayData(value);
-    }
-
-    void Print(double value) {
-        programUtils::displayData(value);
-    }
-
-    void Print(string value) {
-        programUtils::displayData(value);
-    }
-
-    void Print(char value) {
-        programUtils::displayData(value);
+        programUtils::Print(stringData);
     }
 }
 

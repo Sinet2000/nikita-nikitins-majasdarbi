@@ -25,7 +25,7 @@ namespace mainTasks {
         double doubleData = inputValidatorsUtils::getNumericOrCharValidatedInput<double>("| Input second value (double) \t: ");
         auto minValue = min<int, double>(intData, doubleData);
 
-        programUtils::displayData(minValue);
+        programUtils::Print(minValue);
     }
 
 }

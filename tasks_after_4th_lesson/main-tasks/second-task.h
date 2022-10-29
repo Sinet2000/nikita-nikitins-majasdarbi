@@ -12,7 +12,7 @@ namespace mainTasks {
 
     void displayNumSumInRecursion() {
         int n = inputValidatorsUtils::getNumericOrCharValidatedInput<int>();
-        programUtils::displayData(countNumbersSumRecursive(n));
+        programUtils::Print(countNumbersSumRecursive(n));
     }
 
     int countNumbersSumRecursive(int n) {

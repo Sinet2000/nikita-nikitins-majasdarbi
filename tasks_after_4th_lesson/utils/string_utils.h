@@ -1,5 +1,5 @@
-#ifndef string_utils
-#define string_utils
+#ifndef string_utils_h
+#define string_utils_h
 
 #include "program_utils.h"
 #include <iostream>
@@ -29,7 +29,7 @@ namespace StringUtils {
                 reverseStr(stringToReverse);
             }
 
-            programUtils::displayData(stringToReverse);
+            programUtils::Print(stringToReverse);
         }
         catch(const std::exception& e)
         {
@@ -48,7 +48,7 @@ namespace StringUtils {
             reverseCharArray(charArrayToReverse);
         }
 
-        programUtils::displayData(charArrayToReverse);
+        programUtils::Print(charArrayToReverse);
         free(charArrayToReverse);
     }
 

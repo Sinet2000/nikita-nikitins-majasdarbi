@@ -16,6 +16,7 @@
 
 // Additional Tasks
 #include "additional-tasks/first-addit.h"
+#include "additional-tasks/second-addit.h"
 
 
 #if __cplusplus <= 199711L
@@ -46,7 +47,8 @@ int main(int argc, const char * argv[]) {
 MainMenu initializeProgramMenu() {
     MainMenu mainProgram("Tasks after 4th Lesson");
 
-    mainProgram.addItem("(1-additional.uzd) ", &additionalTasks::taskMenuRunner);
+    mainProgram.addItem("(1-additional.uzd) ", &additionalTasks::taskMenuRunnerFirst);
+    mainProgram.addItem("(2-additional.uzd) ", &additionalTasks::taskMenuRunnerSecond);
     mainProgram.addItem("(1.uzd) Reverse string", &mainTasks::displayReversedString);
     mainProgram.addItem("(2.uzd) Sum of 1..n", &mainTasks::displayNumSumInRecursion);
     mainProgram.addItem("(3.uzd) Different data type input and output", &mainTasks::getNDisplayDiffTypeValues);

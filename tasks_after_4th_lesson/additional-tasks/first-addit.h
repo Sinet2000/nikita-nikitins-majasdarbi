@@ -2,6 +2,7 @@
 #define first_addit_h
 #define MAX_TXT_LENGTH 255
 #include "../core-file.h"
+#include "../utils/main_menu.h"
 
 namespace additionalTasks {
 
@@ -12,7 +13,7 @@ void displayReversedStandardCurrentData(char *charArray, string &str, bool & isS
 void displayReversedWithIteratorsCurrentData(char *charArray, string &str, bool & isStringDataLastAdded);
 void displayCurrentStateStringOrCharArrayData(char *charArray, string &str, bool & isStringDataLastAdded);
 
-void taskMenuRunner() {
+void taskMenuRunnerFirst() {
     char _txtArrayMain[MAX_TXT_LENGTH];
     string _txtStringMain;
     bool isStringDataLastAdded;
@@ -46,7 +47,7 @@ void getInputToCharArr(char * txt, bool & isStringDataLastAdded) {
     isStringDataLastAdded = false;
     programUtils::getInputInCharArray("Enter char array", txt, MAX_TXT_LENGTH);
     cout << "Result1:" <<txt<< endl;
-    programUtils::displayData(txt);
+    programUtils::Print(txt);
 }
 
 void displayReversedStandardCurrentData(char *charArray, string &str, bool & isStringDataLastAdded) {
@@ -68,7 +69,7 @@ void displayReversedWithIteratorsCurrentData(char *charArray, string &str, bool 
 }
 
 void displayCurrentStateStringOrCharArrayData(char *charArray, string &str, bool &isStringDataLastAdded) {
-    programUtils::displayData((isStringDataLastAdded ? str : charArray));
+    programUtils::Print((isStringDataLastAdded ? str : charArray));
 }
 
 }  // namespace additionalTasks
