@@ -6,6 +6,8 @@
 #include "../program_utils.h"
 #include "../string_utils.h"
 
+using namespace std;
+
 namespace inputUtils {
 
     enum dataTypeOptions {
@@ -14,6 +16,22 @@ namespace inputUtils {
         CHAR = 3,
         STRING = 4 
     };
+
+    dataTypeOptions getUserSelectedDataType();
+
+    template<typename T>
+    void displayMinValueFromInput();
+
+    template<typename T>
+    void displayMaxValueFromInput();
+
+    template<typename T>
+    void initializeVectorAndDisplay() ;
+
+    void initializeVectorFromInput(vector<int> &dataVector);
+    void initializeVectorFromInput(vector<double> &dataVector);
+    void initializeVectorFromInput(vector<string> &dataVector);
+    void initializeVectorFromInput(vector<char> &dataVector);
 
     dataTypeOptions getUserSelectedDataType() {
         tableUtils::displayHeader(" Select data type");
@@ -51,6 +69,12 @@ namespace inputUtils {
         programUtils::Print(max);
     }
 
+    template<typename T>
+    void initializeVectorAndDisplay() {
+        vector<T> initialData = {};
+        initializeVectorFromInput(initialData);
+    }
+
     void initializeVectorFromInput(vector<int> &dataVector) {
         vector<int> initialData = dataVector;
         cout << "|\t Data initialization :" << endl;
@@ -77,6 +101,131 @@ namespace inputUtils {
                     // cout << "|\t User Input: '" << userInput << "'" << endl;
                     int i = userInput.length() == 1 && isdigit(userInput[0]) ? userInput[0] - '0' : std::stoi(userInput);
                     dataVector.push_back(i);
+                    addedCount++;
+                }
+                catch (const std::invalid_argument &e) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "|\t Error: " << e.what() << "\t Try Again!"<<endl;;
+                }
+                
+            }
+
+        } while (!isFinish && !isCancel);
+
+        if (isCancel)
+            dataVector = initialData;
+
+        programUtils::Print(dataVector);
+    }
+
+    void initializeVectorFromInput(vector<double> &dataVector) {
+        vector<double> initialData = dataVector;
+        cout << "|\t Data initialization :" << endl;
+        cout << "|\t Enter int type data. [{\"f\" - to finish}, {\"c\" - to cancel}]" << endl;
+
+        bool isFinish = true, isCancel = false;
+        int addedCount = 1;
+        string userInput = "";
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        do {
+            cout << "|\t [" << addedCount << "] : ";
+            getline(cin, userInput);
+            StringUtils::stringTrim(userInput);
+
+            isFinish = userInput.length() == 1 &&  tolower(userInput[0]) == 'f';
+            isCancel = userInput.length() == 1 && tolower(userInput[0]) == 'c';
+
+            if (!isFinish && !isCancel) {
+
+                try
+                {
+                    // I am exp problems if it is one digit number
+                    // cout << "|\t User Input: '" << userInput << "'" << endl;
+                    double valueD = stod(userInput);
+                    dataVector.push_back(valueD);
+                    addedCount++;
+                }
+                catch (const std::invalid_argument &e) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "|\t Error: " << e.what() << "\t Try Again!"<<endl;;
+                }
+                
+            }
+
+        } while (!isFinish && !isCancel);
+
+        if (isCancel)
+            dataVector = initialData;
+
+        programUtils::Print(dataVector);
+    }
+
+    void initializeVectorFromInput(vector<string> &dataVector) {
+        vector<string> initialData = dataVector;
+        cout << "|\t Data initialization :" << endl;
+        cout << "|\t Enter string type data. [{\"f\" - to finish}, {\"c\" - to cancel}]" << endl;
+
+        bool isFinish = true, isCancel = false;
+        int addedCount = 1;
+        string userInput = "";
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        do {
+            cout << "|\t [" << addedCount << "] : ";
+            getline(cin, userInput);
+
+            isFinish = userInput.length() == 1 &&  tolower(userInput[0]) == 'f';
+            isCancel = userInput.length() == 1 && tolower(userInput[0]) == 'c';
+
+            if (!isFinish && !isCancel) {
+
+                try
+                {
+                    dataVector.push_back(userInput);
+                    addedCount++;
+                }
+                catch (const std::invalid_argument &e) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "|\t Error: " << e.what() << "\t Try Again!"<<endl;;
+                }
+                
+            }
+
+        } while (!isFinish && !isCancel);
+
+        if (isCancel)
+            dataVector = initialData;
+
+        programUtils::Print(dataVector);
+    }
+
+    void initializeVectorFromInput(vector<char> &dataVector) {
+        vector<char> initialData = dataVector;
+        cout << "|\t Data initialization :" << endl;
+        cout << "|\t Enter string type data. [{\"f\" - to finish}, {\"c\" - to cancel}]" << endl;
+
+        bool isFinish = true, isCancel = false;
+        int addedCount = 1;
+        char userInput;
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        do {
+            cout << "|\t [" << addedCount << "] : ";
+            userInput = inputValidatorsUtils::getNumericOrCharValidatedInput<char>();
+
+
+            isFinish = userInput == 'f';
+            isCancel = userInput == 'c';
+
+            if (!isFinish && !isCancel) {
+
+                try
+                {
+                    dataVector.push_back(userInput);
                     addedCount++;
                 }
                 catch (const std::invalid_argument &e) {

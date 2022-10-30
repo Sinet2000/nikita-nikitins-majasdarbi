@@ -51,7 +51,6 @@ void getInputToCharArr(char * txt, bool & isStringDataLastAdded) {
 }
 
 void displayReversedStandardCurrentData(char *charArray, string &str, bool & isStringDataLastAdded) {
-    cout << "isStringDataLastAdded" << isStringDataLastAdded << endl;
     if (isStringDataLastAdded) {
         StringUtils::reverseStrAndDisplay(str);
     } else {
