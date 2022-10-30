@@ -8,7 +8,15 @@ namespace calculatorUtils {
         ADD = '+',
         MINUS = '-',
         MULTIPLY = '*',
-        DIVIDE = '/'
+        DIVIDE = '/' ,
+        OPENING_BRACE = '(',
+        CLOSED_BRACE = ')'
+    };
+
+    enum operatorsPriority {
+        NOT_OPERAND = 0,
+        LOW = 1,
+        HIGH = 2
     };
 }
 

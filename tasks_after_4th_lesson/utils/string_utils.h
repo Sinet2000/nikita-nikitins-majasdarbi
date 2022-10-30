@@ -17,6 +17,7 @@ namespace StringUtils {
     void reverseStrIterators(std::string &str);
     void reverseCharArray(char *charArray);
     void reverseCharArrayIterators(char *charArray);
+    void stringTrim(string &str);
 
     void reverseStrAndDisplay(string &str, bool useIterators) {
         try
@@ -86,6 +87,10 @@ namespace StringUtils {
 
     void reverseCharArrayIterators(char *charArray) {
         reverse(charArray, charArray + strlen(charArray)); // in algorithm library
+    }
+
+    void stringTrim(string &str) {
+        str.erase(remove(str.begin(), str.end(), ' '), str.end());
     }
 
 };

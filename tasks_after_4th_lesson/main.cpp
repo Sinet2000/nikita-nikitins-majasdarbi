@@ -17,7 +17,7 @@
 // Additional Tasks
 #include "additional-tasks/first-addit.h"
 #include "additional-tasks/second-addit.h"
-
+#include "additional-tasks/fifth-addit.h"
 
 #if __cplusplus <= 199711L
   #error This file needs at least a C++11 compliant compiler, try using:
@@ -49,6 +49,7 @@ MainMenu initializeProgramMenu() {
 
     mainProgram.addItem("(1-additional.uzd) ", &additionalTasks::taskMenuRunnerFirst);
     mainProgram.addItem("(2-additional.uzd) ", &additionalTasks::taskMenuRunnerSecond);
+    mainProgram.addItem("(5-additional.uzd) ", &additionalTasks::taskMenuRunnerFifth);
     mainProgram.addItem("(1.uzd) Reverse string", &mainTasks::displayReversedString);
     mainProgram.addItem("(2.uzd) Sum of 1..n", &mainTasks::displayNumSumInRecursion);
     mainProgram.addItem("(3.uzd) Different data type input and output", &mainTasks::getNDisplayDiffTypeValues);
