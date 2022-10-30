@@ -2,6 +2,7 @@
 #define second_task_h
 
 #include "../core-file.h"
+#include "../utils/math_utils.h"
 
 using namespace std;
 
@@ -12,13 +13,7 @@ namespace mainTasks {
 
     void displayNumSumInRecursion() {
         int n = inputValidatorsUtils::getNumericOrCharValidatedInput<int>();
-        programUtils::Print(countNumbersSumRecursive(n));
-    }
-
-    int countNumbersSumRecursive(int n) {
-        if (n == 0) return 0;
-        
-        return n + countNumbersSumRecursive(n-1);
+        programUtils::Print(MathUtils::countNumbersSumRecursive(n));
     }
 
 }

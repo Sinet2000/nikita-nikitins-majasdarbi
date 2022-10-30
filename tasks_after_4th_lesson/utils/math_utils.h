@@ -165,6 +165,12 @@ namespace MathUtils {
         return expressionValues.top();
         
     }
+
+    int countNumbersSumRecursive(int n) {
+        if (n == 0) return 0;
+        
+        return n + countNumbersSumRecursive(n-1);
+    }
 };
 
 #endif
