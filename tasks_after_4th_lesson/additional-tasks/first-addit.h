@@ -8,7 +8,7 @@ namespace additionalTasks {
 
 // main chunks
 void getInputToCharArr(char * txt, bool & isStringDataLastAdded);
-void getInputToString(string &txtData, bool & isStringDataLastAdded);
+void getInputToStringWithLastStatusUpdate(string &txtData, bool & isStringDataLastAdded);
 void displayReversedStandardCurrentData(char *charArray, string &str, bool & isStringDataLastAdded);
 void displayReversedWithIteratorsCurrentData(char *charArray, string &str, bool & isStringDataLastAdded);
 void displayCurrentStateStringOrCharArrayData(char *charArray, string &str, bool & isStringDataLastAdded);
@@ -20,15 +20,15 @@ void taskMenuRunnerFirst() {
 
     MainMenu mainProgram1("1 additional");
     
-    mainProgram1.addItem("Enter string", &additionalTasks::getInputToString, _txtStringMain, isStringDataLastAdded);
+    mainProgram1.addItem("Enter string", &getInputToStringWithLastStatusUpdate, _txtStringMain, isStringDataLastAdded);
 
-    mainProgram1.addItem("Enter char array", &additionalTasks::getInputToCharArr, _txtArrayMain, isStringDataLastAdded);
+    mainProgram1.addItem("Enter char array", &getInputToCharArr, _txtArrayMain, isStringDataLastAdded);
 
-    mainProgram1.addItem("Standard Reverse", &additionalTasks::displayReversedStandardCurrentData, _txtArrayMain, _txtStringMain, isStringDataLastAdded);
+    mainProgram1.addItem("Standard Reverse", &displayReversedStandardCurrentData, _txtArrayMain, _txtStringMain, isStringDataLastAdded);
 
-    mainProgram1.addItem("Iterators Reverse", &additionalTasks::displayReversedWithIteratorsCurrentData, _txtArrayMain, _txtStringMain, isStringDataLastAdded);
+    mainProgram1.addItem("Iterators Reverse", &displayReversedWithIteratorsCurrentData, _txtArrayMain, _txtStringMain, isStringDataLastAdded);
 
-    mainProgram1.addItem("Display data", &additionalTasks::displayCurrentStateStringOrCharArrayData , _txtArrayMain, _txtStringMain, isStringDataLastAdded);
+    mainProgram1.addItem("Display data", &displayCurrentStateStringOrCharArrayData , _txtArrayMain, _txtStringMain, isStringDataLastAdded);
 
     mainProgram1.addItem("Exit", true);
 
@@ -38,7 +38,7 @@ void taskMenuRunnerFirst() {
 
 // main
 // ********************************************************************************************************************************************************
-void getInputToString(string &txtData, bool & isStringDataLastAdded) {
+void getInputToStringWithLastStatusUpdate(string &txtData, bool & isStringDataLastAdded) {
     isStringDataLastAdded = true;
     txtData = programUtils::getInputInString("Enter string");
 }

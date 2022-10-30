@@ -26,6 +26,27 @@ namespace MathUtils {
         return (1 + getCountOfDigitsInInt(number / 10));
     }
 
+    template<typename T, typename U>
+    typename std::common_type<T, U>::type min(T const& a, U const& b) {
+        return (a < b) ? a : b;
+    }
+
+    template<typename T, typename U>
+    typename std::common_type<T, U>::type max(T const& a, U const& b) {
+        return (a > b) ? a : b;
+    }
+
+    template<typename T>
+    T min(vector<T> const& a) {
+        return *min_element(a.begin(), a.end());
+    }
+
+
+    template<typename T>
+    T max(vector<T> const& a) {
+        return *max_element(a.begin(), a.end());
+    }
+
     calculatorUtils::operatorsPriority getMathOperatorPriority(char opr){
         calculatorUtils::calculatorOperations operatorEnum = static_cast<calculatorUtils::calculatorOperations>(opr);
 

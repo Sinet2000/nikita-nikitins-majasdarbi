@@ -60,7 +60,31 @@ namespace programUtils {
 
     void Print(std::vector<char> vectorData) {
             for (std::vector<char>::iterator it = vectorData.begin(); it != vectorData.end(); ++it) {
-            cout << *it;
+            cout << *it<< " ";
+        }
+    }
+
+    void Print(std::vector<int> vectorData) {
+            for (std::vector<int>::iterator it = vectorData.begin(); it != vectorData.end(); ++it) {
+            cout << *it << " ";
+        }
+    }
+
+    void Print(std::vector<double> vectorData) {
+            for (std::vector<double>::iterator it = vectorData.begin(); it != vectorData.end(); ++it) {
+            cout << *it<< " ";
+        }
+    }
+
+    void Print(std::vector<std::string> vectorData) {
+            for (std::vector<std::string>::iterator it = vectorData.begin(); it != vectorData.end(); ++it) {
+            cout << *it<< " ";
+        }
+    }
+
+    void Print(std::vector<char *> vectorData) {
+            for (std::vector<char *>::iterator it = vectorData.begin(); it != vectorData.end(); ++it) {
+            cout << *it<< " ";
         }
     }
 
@@ -72,7 +96,71 @@ namespace programUtils {
         cout << endl;
     }
 
+    void Print(std::stack<int> stackData) {
+        while (!stackData.empty()) {
+            cout << stackData.top()<<", ";
+            stackData.pop();
+        }
+        cout << endl;
+    }
+
+    void Print(std::stack<double> stackData) {
+        while (!stackData.empty()) {
+            cout << stackData.top()<<", ";
+            stackData.pop();
+        }
+        cout << endl;
+    }
+
+    void Print(std::stack<std::string> stackData) {
+        while (!stackData.empty()) {
+            cout << stackData.top()<<", ";
+            stackData.pop();
+        }
+        cout << endl;
+    }
+
+    void Print(std::stack<char *> stackData) {
+        while (!stackData.empty()) {
+            cout << stackData.top()<<", ";
+            stackData.pop();
+        }
+        cout << endl;
+    }
+
     void Print(std::queue<char> q) {
+        while (!q.empty()) {
+            cout << q.front()<<" ";
+            q.pop();
+        }
+        cout << endl;
+    }
+
+    void Print(std::queue<int> q) {
+        while (!q.empty()) {
+            cout << q.front()<<" ";
+            q.pop();
+        }
+        cout << endl;
+    }
+
+    void Print(std::queue<double> q) {
+        while (!q.empty()) {
+            cout << q.front()<<" ";
+            q.pop();
+        }
+        cout << endl;
+    }
+
+    void Print(std::queue<std::string> q) {
+        while (!q.empty()) {
+            cout << q.front()<<" ";
+            q.pop();
+        }
+        cout << endl;
+    }
+
+    void Print(std::queue<char *> q) {
         while (!q.empty()) {
             cout << q.front()<<" ";
             q.pop();

@@ -23,10 +23,22 @@ namespace programUtils {
 
 
     void Print(std::vector<char> vectorData);
+    void Print(std::vector<int> vectorData);
+    void Print(std::vector<std::string> vectorData);
+    void Print(std::vector<double> vectorData);
+    void Print(std::vector<char *> vectorData);
 
     void Print(std::stack<char> stackData);
+    void Print(std::stack<int> stackData);
+    void Print(std::stack<std::string> stackData);
+    void Print(std::stack<double> stackData);
+    void Print(std::stack<char *> stackData);
 
     void Print(std::queue<char> queueData);
+    void Print(std::queue<int> queueData);
+    void Print(std::queue<std::string> queueData);
+    void Print(std::queue<double> queueData);
+    void Print(std::queue<char *> queueData);
 
     void swap(char *a, char *b);
 }
