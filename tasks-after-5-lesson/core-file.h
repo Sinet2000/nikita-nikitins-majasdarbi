@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <cstring>
+#include <cstdlib>
 #include <time.h>
 #include <stdlib.h>
 #include "utils/program_utils.h"

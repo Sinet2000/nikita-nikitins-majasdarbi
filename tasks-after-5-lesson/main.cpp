@@ -11,6 +11,10 @@
 #include "main-tasks/fourth-task.h"
 #include "main-tasks/fifth-task.h"
 
+#include "additional-tasks/first-addit.h"
+#include "additional-tasks/second-addit.h"
+#include "additional-tasks/third-addit.h"
+
 #if __cplusplus <= 199711L
   #error This file needs at least a C++11 compliant compiler, try using:
   #error    $ g++ -std=c++11 ..
@@ -38,6 +42,9 @@ int main(int argc, const char * argv[]) {
 MainMenu initializeProgramMenu() {
     MainMenu mainProgram("Tasks after 5th Lesson");
 
+    mainProgram.addItem("(1-additional.uzd)", &additionalTasks::taskMenuRunnerFirst);
+    mainProgram.addItem("(2-additional.uzd)", &additionalTasks::taskMenuRunnerSecond);
+    mainProgram.addItem("(3-additional.uzd)", &additionalTasks::taskMenuRunnerThird);
     mainProgram.addItem("(1.uzd) Input / pointers", &mainTasks::getInputAndDisplaySum);
     mainProgram.addItem("(2.uzd) Find in array", &mainTasks::findNumInData);
     mainProgram.addItem("(3.uzd) Enter Char arr/ string length", &mainTasks::getEnteredStringLength);

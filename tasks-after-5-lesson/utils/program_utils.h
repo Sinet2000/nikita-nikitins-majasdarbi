@@ -23,6 +23,8 @@ namespace programUtils {
     void Print(char *data);
 
     void Print(int *data, int size);
+
+    void swap(int *a, int *b);
 }
 
 

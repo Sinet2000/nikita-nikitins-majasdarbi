@@ -15,7 +15,8 @@ namespace mainTasks {
         programUtils::Print(numArr, numArrSize);
         int *valueToFind = inputValidatorsUtils::getValidatedInputPointed<int>("| Please enter value to find |\t: ");
         
-        programUtils::Print((arrayUtils::findIdx(numArr, numArrSize, *valueToFind)) > 0 ? "Found" : "Not Found");
+        arrayUtils::FindResult findRes1= arrayUtils::findInArray(numArr, numArrSize, *valueToFind);
+        programUtils::Print(findRes1.found ? "Found" : "Not Found");
     }
 } // namespace mainTasks
 

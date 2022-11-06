@@ -15,7 +15,6 @@ namespace programUtils {
         string txt;
 
         cout << "\n| " << description << " |\t>>";
-        cin.ignore();
         getline(cin, txt);
 
         return txt;
@@ -25,7 +24,6 @@ namespace programUtils {
         char *charArr = (char*)malloc((length + 1) * sizeof(char)); // length + 1, cause the last one is '\0'
         cout << "\n| " << description << " |\t>>";
         cin.getline(charArr, length);
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         
         return charArr;
     }
@@ -68,5 +66,11 @@ namespace programUtils {
             cout << *p << " ";
         }
         cout << endl;
+    }
+
+    void swap(int *a, int *b) {
+        int temp = *a;
+        *a = *b;
+        *b = temp;
     }
 } 

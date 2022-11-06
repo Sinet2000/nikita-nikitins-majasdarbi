@@ -33,6 +33,8 @@ namespace inputValidatorsUtils {
             if (!cin.fail()) break;
         }
 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        
         return userInput;
     }
 
