@@ -19,7 +19,7 @@ struct FindResult {
 
 struct IntArrayModel {
     int *arr;
-    int size;
+    const size_t size;
 };
 
 void displayReversed(int *data, int size);
@@ -29,6 +29,8 @@ bool containsDuplicate(int *data, int size);
 FindResult findInArray(int *data, int size, int toFind);
 void displayDistinctInTwo(IntArrayModel &arrModel1, IntArrayModel &arrModel2);
 bool checkArrayConsistency(IntArrayModel &arrModel1);
+void displayPrimes(IntArrayModel &arrModel1);
+void displaySorted(IntArrayModel &arrModel1);
 
 void displayReversed(int *data, int size) {
     cout << "\nReversed: ";
@@ -54,7 +56,7 @@ void bubbleSort(int *data, int size) {
 
     while (!sorted) {
         sorted = true;
-
+        
         for (int i = 0; i < size - 1; i++) {
             if (*(data + i) > *(data + i + 1)) {
                 programUtils::swap((data + i), (data + i + 1));
@@ -118,8 +120,8 @@ bool checkArrayConsistency(IntArrayModel &arrModel1) {
         return false;
     }
 
-    for (int *arr1El = arrModel1.arr; arr1El < arrModel1.arr + arrModel1.size;
-         ++arr1El) {
+    for (int *arr1El = arrModel1.arr; arr1El < arrModel1.arr + arrModel1.size; ++arr1El) {
+
         if (*arr1El != *(arr1El + 1) - 1 && arr1El != arrModel1.arr + arrModel1.size - 1) {
 
             cout << "\nIncorrect sequence! After (" << *arr1El << ") must be("
@@ -131,6 +133,49 @@ bool checkArrayConsistency(IntArrayModel &arrModel1) {
 
     cout << "\nSequence is correct!" << endl;
     return true;
+}
+
+void displayPrimes(IntArrayModel &arrModel1) {
+    cout << "\nPrime Numbers: ";
+    for (int *arr1El = arrModel1.arr; arr1El < arrModel1.arr + arrModel1.size; ++arr1El) {
+        
+        if (mathUtils::isPrimeNumber(*arr1El))
+            cout << *arr1El << " ";
+    }
+
+    cout << endl;
+}
+
+void displaySorted(IntArrayModel &arrModel1) {
+    cout << "\nSorted: ";
+    int *intArrNew = (int*)malloc(arrModel1.size);
+    
+    for (int i = 0; i < arrModel1.size; i++) {
+        *(intArrNew + i) = *(arrModel1.arr + i);
+    }
+
+    arrayUtils::bubbleSort(intArrNew, arrModel1.size);
+
+    for (int *intArrNewEl = intArrNew; intArrNewEl < intArrNew + arrModel1.size ; ++intArrNewEl) {
+
+        cout << *intArrNewEl << " ";
+    }
+
+    cout << endl;
+}
+
+void displayEverySecondIntInArr(IntArrayModel &arrModel1) {
+    cout << "\nEvery Second: ";
+
+    if (arrModel1.size <= 1)
+        return;
+
+    for (int *intArrNewEl = arrModel1.arr + 1; intArrNewEl < arrModel1.arr + arrModel1.size - 1; intArrNewEl+=2) {
+
+        cout << *intArrNewEl << " ";
+    }
+
+    cout << endl;
 }
 
 // void getDistictValuesFromArr(vector<int*> &distictValues, IntArrayModel

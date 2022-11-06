@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <cstdlib>
 #include <time.h>
 #include <stdlib.h>
@@ -11,5 +12,6 @@
 #include "utils/math_utils.h"
 #include "utils/array_utils.h"
 #include "utils/string_utils.h"
+#include "utils/statistics_utils.h"
 
 #endif
