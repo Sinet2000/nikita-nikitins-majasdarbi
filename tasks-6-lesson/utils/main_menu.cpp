@@ -58,6 +58,12 @@ void MainMenu::addItem(std::string title, void (*funcPtr)(std::string & callback
     count++;
 }
 
+void MainMenu::addItem(std::string title, void (*funcPtr)(std::string & callbackParamType1, std::string & callbackParamType2), std::string & eventParam1, std::string & eventParam2, bool isTerminatingItem) {
+    menuItems.push_back(new MainMenuItem(title, funcPtr, eventParam1, eventParam2, count, isTerminatingItem));
+
+    count++;
+}
+
 void MainMenu::addItem(std::string title, void (*funcPtr)(char * callbackParamType), char * eventParam, bool isTerminatingItem) {
     menuItems.push_back(new MainMenuItem(title, funcPtr, eventParam, count, isTerminatingItem));
 

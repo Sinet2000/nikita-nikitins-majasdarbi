@@ -16,12 +16,14 @@ class MainMenuItem {
     void (*eventCallbackPtrCharArrAndBoolRef)(char *, bool &) = nullptr;
 
     void (*eventCallbackPtrStringRef)(std::string &) = nullptr;
+    void (*eventCallbackPtrDoubleStringRef)(std::string &, std::string &) = nullptr;
     void (*eventCallbackPtrStringAndBoolRef)(std::string &, bool &) = nullptr;
 
     void (*eventCallbackCharAndString)(char *, std::string &, bool &) = nullptr;
 
     int * _eventParamInt = nullptr;
     std::string * _eventParamString = nullptr;
+    std::string * _eventParamStringAdditional = nullptr;
     char * _eventParamCharArray = nullptr;
     bool * _eventParamBool = nullptr;
     // void (MainMenuRunner::*menuRunnerEventCallbackPtr)() = nullptr;
@@ -33,6 +35,7 @@ class MainMenuItem {
     MainMenuItem(std::string initTitle, void (*initEventCallbackPtrIntRef)(int &numberParam), int &eventParam, int initIndex, bool isTerminatingItem = false);
 
     MainMenuItem(std::string initTitle, void (*initEventCallbackPtrStringRef)(std::string &stringParam), std::string &eventParam, int initIndex, bool isTerminatingItem = false);
+    MainMenuItem(std::string initTitle, void (*initEventCallbackPtrStringRef)(std::string &stringParam1, std::string &stringParam2), std::string &eventParam1, std::string &eventParam2, int initIndex, bool isTerminatingItem = false);
     MainMenuItem(std::string initTitle, void (*initEventCallbackPtrStringAndBoolRef)(std::string &stringParam, bool &boolParamType), std::string &eventParam, bool &boolParam, int initIndex, bool isTerminatingItem = false);
 
     MainMenuItem(std::string initTitle, void (*initEventCallbackPtrCharArrRef)(char *charArrParam), char *eventParam, int initIndex, bool isTerminatingItem = false);

@@ -32,6 +32,14 @@ MainMenuItem::MainMenuItem(std::string initTitle, void(*initEventCallbackPtrStri
     eventCallbackPtrStringRef = initEventCallbackPtrStringRef;
 }
 
+MainMenuItem::MainMenuItem(std::string initTitle, void(*initEventCallbackPtrStringRef)(std::string &stringParam1, std::string &stringParam2), std::string &eventParam1, std::string &eventParam2, int initIndex, bool isTerminatingItem) : MainMenuItem::MainMenuItem(initTitle, initIndex, isTerminatingItem) {
+   
+   _eventParamString = &eventParam1;
+   _eventParamStringAdditional = &eventParam2;
+
+    eventCallbackPtrDoubleStringRef = initEventCallbackPtrStringRef;
+}
+
 MainMenuItem::MainMenuItem(std::string initTitle, void(*initEventCallbackPtrStringAndBoolRef)(std::string &stringParam, bool &boolParamType), std::string &eventParam, bool &boolParam, int initIndex, bool isTerminatingItem) : MainMenuItem::MainMenuItem(initTitle, initIndex, isTerminatingItem) {
    
    _eventParamString = &eventParam;
@@ -83,6 +91,7 @@ void MainMenuItem::onEventCallbackPerform() {
     if (eventCallbackPtrCharArrRef != nullptr && _eventParamCharArray != NULL) eventCallbackPtrCharArrRef(_eventParamCharArray);
     if (eventCallbackPtrCharArrAndBoolRef != nullptr && _eventParamCharArray != NULL && _eventParamBool != nullptr) return  eventCallbackPtrCharArrAndBoolRef(_eventParamCharArray, *_eventParamBool);
 
+    if (eventCallbackPtrDoubleStringRef != nullptr && _eventParamString != NULL && _eventParamStringAdditional != NULL) return eventCallbackPtrDoubleStringRef(*_eventParamString, *_eventParamStringAdditional);
     if (eventCallbackPtrStringRef != nullptr && _eventParamString != NULL) return eventCallbackPtrStringRef(*_eventParamString);
     if (eventCallbackPtrStringAndBoolRef != nullptr && _eventParamString != NULL && _eventParamBool != nullptr) return eventCallbackPtrStringAndBoolRef(*_eventParamString, *_eventParamBool);
 

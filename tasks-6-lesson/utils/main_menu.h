@@ -44,6 +44,7 @@ class MainMenu {
     void addItem(std::string, void (*)(char *, bool &), char * eventParam,  bool & boolParam, bool isTerminatingItem = false);
 
     void addItem(std::string, void (*)(std::string &), std::string &eventParam, bool isTerminatingItem = false);
+    void addItem(std::string, void (*)(std::string &, std::string &), std::string &eventParam1, std::string &eventParam2, bool isTerminatingItem = false);
     void addItem(std::string, void (*)(std::string &, bool &), std::string & eventParam, bool & boolParam, bool isTerminatingItem = false);
     
     void addItem(std::string, void (*)(char *, std::string &, bool &), char * eventParamCharArr, std::string & eventParamStr, bool & boolParam, bool isTerminatingItem = false);
