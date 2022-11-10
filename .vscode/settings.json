@@ -78,6 +78,10 @@
     "streambuf": "cpp",
     "typeinfo": "cpp",
     "locale": "cpp",
-    "cstring": "cpp"
+    "cstring": "cpp",
+    "map": "cpp",
+    "set": "cpp",
+    "optional": "cpp",
+    "fstream": "cpp"
   }
 }

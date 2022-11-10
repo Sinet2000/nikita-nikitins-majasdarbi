@@ -24,7 +24,7 @@ namespace additionalTasks {
 
     void displayMiddleEl() {
         int numArr[] = { 79, 3, 6, 97, 89, 5, 1, 5, 4, 8, 9, 10, 47, 132, 90, 100, 23, 56, 47};
-        const size_t  numArrSize = sizeof(numArr) / sizeof(int);
+        const size_t numArrSize = sizeof(numArr) / sizeof(int);
         programUtils::Print(numArr, numArrSize);
 
         int *middleEl = statisticsUtils::getMiddleElement<int>(numArr, numArrSize);
