@@ -1,60 +1,113 @@
 #ifndef fifth_task_h
 #define fifth_task_h
 
+#include <cstdio>
+#include <iterator>
+#include <sstream>
+#include <vector>
+
 #include "../core-file.h"
 #include "../utils/main_menu.h"
-#include <cstdio>
-#include <vector>
-#include <iterator>  
-#include <sstream>
 
 using namespace std;
 
 namespace mainTasks {
 
-    void initializeDatetime(string &dateTime) {
-        dateTime = inputValidatorsUtils::getTextInput("\nEnter datetime to work with: ", "13.10.2021 16:49");
-    }
+enum MenuItems {
+    INITIALIZE_DATETIME = 1,
+    SAVE_DATETIME_BIN = 2,
+    READ_DISPLAY_BIN = 3,
+    MENU_EXIT = 4,
+};
 
-    void saveDatetimeToBinaryFile(string &fileName, string &dateTime) {
-        cout << "\nWriting to file..." <<endl;
+void datetimeManagerInBinFile();
+void initializeDatetime(string &dateTime);
+void saveDatetimeToBinaryFile(const string &fileName, const string &dateTime);
+void readAndDisplayBinaryFileContent(const string &fileName, string &dateTime);
+void displayMenu();
 
-        const int txtArrLength = fileName.length() + 1;
-        char *charArr = (char*)malloc((txtArrLength) * sizeof(char));
+void datetimeManagerInBinFile() {
+    string dateTime = "13.10.2021 16:49";
+    const string fileName = "file-5uzd.bin";
 
-        fileUtils::writeArrToFile(fileName, charArr, txtArrLength, true);
-        cout << "\nWriting finished." <<endl;
-    }
+    int userInput;
 
-    void readAndDisplayBinaryFileContent(string &fileName, string &dateTime) {
-        vector<char> fileContent = fileUtils::readArrFromFile<char>(fileName, true);
-        ostringstream stream;
+    do
+    {
+        displayMenu();
+        userInput = inputValidatorsUtils::getUserMenuInput("\nSelect from menu: (1, 2, 3 or 4):\t");
 
-        cout << "\nFile " << fileName << " content: " <<endl;
-        if(!fileContent.empty()){
-            copy(fileContent.begin(), fileContent.end()-1, ostream_iterator<int>(stream," "));
-            stream << fileContent.back();
-            dateTime = stream.str();
+        switch (userInput) {
+            case INITIALIZE_DATETIME:
+                initializeDatetime(dateTime);
+
+                cin.ignore();
+                cin.get();
+
+                break;
+
+            case SAVE_DATETIME_BIN:
+                saveDatetimeToBinaryFile(fileName, dateTime);
+
+                cin.ignore();
+                cin.get();
+
+                break;
+
+            case READ_DISPLAY_BIN:
+                readAndDisplayBinaryFileContent(fileName, dateTime);
+
+                cin.ignore();
+                cin.get();
+
+                break;
+
+            default:
+                cout << "\nIncorrect menu item selection. Please try again!" <<endl;
+                break;
         }
-        cout<< stream.str() <<endl;
+
+    } while (userInput != MENU_EXIT);
+    
+}
+
+void initializeDatetime(string &dateTime) {
+    dateTime = inputValidatorsUtils::getTextInput(
+        "\nEnter datetime to work with: ", "13.10.2021 16:49");
+}
+
+void saveDatetimeToBinaryFile(const string &fileName, const string &dateTime) {
+    cout << "\nWriting to file..." << endl;
+
+    const int txtArrLength = dateTime.length() + 1;
+    char *charArr = (char *)malloc((txtArrLength) * sizeof(char));
+    strcpy(charArr, dateTime.c_str());
+
+    fileUtils::writeArrToFile(fileName, charArr, txtArrLength, true);
+    cout << "\nWriting finished." << endl;
+}
+
+void readAndDisplayBinaryFileContent(const string &fileName, string &dateTime) {
+    vector<char> fileContent = fileUtils::readArrFromFile<char>(fileName, true);
+    dateTime = "";
+
+    for (std::vector<char>::iterator it = fileContent.begin(); it != fileContent.end(); ++it) {
+        dateTime += *it;
     }
 
-    void datetimeManagerInBinFile() {
-        string dateTime = "13.10.2021 16:49";
-        string fileName = "file-5uzd.bin";
+    cout << "\nFetched data: " << dateTime <<endl;
+}
 
-        MainMenu mainProgram("Tasks after 6th Lesson");
+void displayMenu() {
+    cout << "\n\t5.uzd Bin file Manager" << endl;
+    cout << "\nSelect: " <<endl;
+    cout << "[" << INITIALIZE_DATETIME << "]\t Set Datetime" <<endl;
+    cout << "[" << SAVE_DATETIME_BIN << "]\t Save Datetime to bin file" <<endl;
+    cout << "[" << READ_DISPLAY_BIN << "]\t Read datetime from bin file and display" <<endl;
+    cout << "[" << MENU_EXIT << "]\t Exit menu" <<endl;
+    cout << "\n";
+}
 
-        mainProgram.addItem("Set Date Time", &initializeDatetime, dateTime);
-        mainProgram.addItem("Save to Binary File", &saveDatetimeToBinaryFile, fileName, dateTime);
-        mainProgram.addItem("Display data from Binary File", &readAndDisplayBinaryFileContent, fileName, dateTime);
-
-        mainProgram.addItem("Exit", true);
-
-        mainProgram.runProgram();
-    }
-
-} // namespace mainTasks
-
+}  // namespace mainTasks
 
 #endif

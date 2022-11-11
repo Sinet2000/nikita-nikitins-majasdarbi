@@ -19,20 +19,20 @@ namespace mainTasks {
         const char evenIntStorageFileName[] = "file2.txt";
         const char primeIntStorageFileName[] = "file3.txt";
 
-        if(remove(oddIntStorageFileName) != 0 && remove(evenIntStorageFileName) != 0 && remove(primeIntStorageFileName) != 0 ) {
-            for (int *intArllEl = intArr; intArllEl < intArr + maxElementsInArray ; ++intArllEl) {
+        remove(oddIntStorageFileName);
+        remove(evenIntStorageFileName);
+        remove(primeIntStorageFileName);
 
-                if (mathUtils::isPrimeNumber(*intArllEl))
-                    fileUtils::appendToFile<int>(primeIntStorageFileName, *intArllEl);
+        for (int *intArllEl = intArr; intArllEl < intArr + maxElementsInArray ; ++intArllEl) {
 
-                if (mathUtils::isOdd(*intArllEl))
-                    fileUtils::appendToFile<int>(oddIntStorageFileName, *intArllEl);
+            if (mathUtils::isPrimeNumber(*intArllEl))
+                fileUtils::appendToFile<int>(primeIntStorageFileName, *intArllEl);
 
-                if (mathUtils::isEven(*intArllEl))
-                    fileUtils::appendToFile<int>(evenIntStorageFileName, *intArllEl);
-            }
-        } else {
-            cout << "\nAn error occurred while removing files" <<endl;
+            if (mathUtils::isOdd(*intArllEl))
+                fileUtils::appendToFile<int>(oddIntStorageFileName, *intArllEl);
+
+            if (mathUtils::isEven(*intArllEl))
+                fileUtils::appendToFile<int>(evenIntStorageFileName, *intArllEl);
         }
     }
 
