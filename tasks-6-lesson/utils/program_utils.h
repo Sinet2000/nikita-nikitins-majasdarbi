@@ -39,5 +39,10 @@ namespace programUtils
         transform(v.begin(), v.end(), arr,[](const T & elem){return elem;});
         return arr;
     }
+
+    const vector<string> &getReservedFileNames() {
+        const vector<string> reservedFileNames = {"file-5uzd.bin", "file-task1.txt", "file1.txt", "file2.txt", "file3.txt", "file4.txt", "file5.txt"};
+        return reservedFileNames;
+    }
     
 } // namespace programUtils

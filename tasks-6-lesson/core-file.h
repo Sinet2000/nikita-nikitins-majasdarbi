@@ -11,5 +11,9 @@
 #include "utils/program_utils.h"
 #include "utils/math_utils.h"
 #include "utils/file_util.h"
+#include "utils/vector_utils.h"
+
+// enums
+#include "utils/enums/DefaultMenuItem.h"
 
 #endif
