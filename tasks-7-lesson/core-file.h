@@ -24,9 +24,7 @@ class ProgramConstants {
         static constexpr const char* TEXT_FILE_EXT = ".txt";
         static constexpr const char* BIN_FILE_EXT = ".bin";
 
-        static constexpr const char* FIRST_PROGRAM_FILENAME = "file-task1.txt";
-        static constexpr const char* SECOND_PROGRAM_FILENAME = "file2.txt";
-        static constexpr const char* SECOND_ADDITIONAL_TASK_FILENAME = "file2_1.txt";
+        static constexpr const int MAX_TXT_LENGTH = 255;
 };
 
 #endif
