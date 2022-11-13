@@ -12,8 +12,19 @@
 #include "utils/math_utils.h"
 #include "utils/file_util.h"
 #include "utils/vector_utils.h"
+#include "utils/output_utils.h"
 
 // enums
 #include "utils/enums/DefaultMenuItem.h"
+
+
+class ProgramConstants {
+    
+    public:
+        static constexpr const char* TEXT_FILE_EXT = ".txt";
+        static constexpr const char* BIN_FILE_EXT = ".bin";
+
+        static constexpr const char* FIRST_PROGRAM_FILENAME = "file-task1.txt";
+};
 
 #endif

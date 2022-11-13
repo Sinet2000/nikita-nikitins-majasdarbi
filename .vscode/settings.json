@@ -82,6 +82,9 @@
     "map": "cpp",
     "set": "cpp",
     "optional": "cpp",
-    "fstream": "cpp"
-  }
+    "fstream": "cpp",
+    "bitset": "cpp",
+    "regex": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "Disabled"
 }

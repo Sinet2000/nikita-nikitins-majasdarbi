@@ -30,7 +30,7 @@ std::string MainMenuItem::getTitle() {
     return _title;
 }
 
-void MainMenuItem::onEventCallbackPerform() {
+bool MainMenuItem::onEventCallbackPerform() {
     // Perform callback if exists
     if (eventCallbackPtr != nullptr) eventCallbackPtr();
 }

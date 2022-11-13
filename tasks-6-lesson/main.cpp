@@ -11,6 +11,8 @@
 #include "main-tasks/fourth-task.h"
 #include "main-tasks/fifth-task.h"
 
+#include "additional-tasks/first-addit.h"
+
 #if __cplusplus < 201703L
   #error This file needs at least a C++17 compliant compiler, try using:
   #error    $ g++ -std=c++17 ..
@@ -37,6 +39,8 @@ int main(int argc, const char * argv[]) {
 
 MainMenu initializeProgramMenu() {
   MainMenu mainProgram("Tasks after 6th Lesson");
+
+  mainProgram.addItem("(1.Extra)", &additionalTasks::taskMenuRunnerFirst);
 
   mainProgram.addItem("(1.uzd) Save entered txt", &mainTasks::saveUserEnteredTxt);
   mainProgram.addItem("(2.uzd) Integer manager", &mainTasks::manageIntArrayToFiles);

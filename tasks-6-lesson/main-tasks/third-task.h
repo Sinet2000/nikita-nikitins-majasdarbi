@@ -10,15 +10,13 @@ using namespace std;
 namespace mainTasks {
 
     void countLettersInFileTxt() {
-//         const char *mainTxt = R""""(
-// The syntax highlighting engine has been significantly improved, with new features like handling non-deterministic grammars, multi-line constructs, lazy embeds and syntax inheritance. 
-// Memory usage has been reduced, and load times are faster than ever.
-// Eat snack.
-// Write code.
-// Eat snack.
-//         )"""";
-
-        const char *mainTxt = "Nikita Nikitins. Yeah";
+        const char *mainTxt = R""""(
+The syntax highlighting engine has been significantly improved, with new features like handling non-deterministic grammars, multi-line constructs, lazy embeds and syntax inheritance. 
+Memory usage has been reduced, and load times are faster than ever.
+Eat snack.
+Write code.
+Eat snack.
+        )"""";
 
 
         const string fileName = "file4.txt";
