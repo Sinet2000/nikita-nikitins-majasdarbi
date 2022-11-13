@@ -3,6 +3,9 @@
 
 #include "../core-file.h"
 #include "../utils/main_menu.h"
+#include <iterator>
+#include <algorithm>
+#include <iomanip>
 
 
 using namespace std;
@@ -10,9 +13,9 @@ using namespace std;
 namespace mainTasks {
 
     struct Student {
-        char[ProgramConstants::MAX_TXT_LENGTH] name;
-        char[ProgramConstants::MAX_TXT_LENGTH] surname;
-        char[ProgramConstants::MAX_TXT_LENGTH] email;
+        string name;
+        string surname;
+        string email;
         int age;
     };
 
@@ -25,6 +28,8 @@ namespace mainTasks {
     void displayMenu();
 
     void createStudent(vector<Student> &students);
+    void deleteStudent(vector<Student> &students);
+    void displayAllStudents(vector<Student> &students);
 
     void taskMenuRunnerFirst() {
         vector<Student> students;
@@ -46,7 +51,7 @@ namespace mainTasks {
                     break;
 
                 case DELETE_STUDENT:
-                    displayNewFileName(newFileName);
+                    deleteStudent(students);
 
                     cin.ignore();
                     cin.get();
@@ -54,7 +59,7 @@ namespace mainTasks {
                     break;
 
                 case DISPLAY_ALL:
-                    combineFileWithFirstProgramFile(newFileName);
+                    displayAllStudents(students);
 
                     cin.ignore();
                     cin.get();
@@ -81,7 +86,40 @@ namespace mainTasks {
     }
 
     void createStudent(vector<Student> &students) {
-        inputValidatorsUtils::getTextInput("\nName:");
+        Student newStudent;
+
+        newStudent.name = inputValidatorsUtils::getTextInput("\nName:");
+        newStudent.surname = inputValidatorsUtils::getTextInput("\nSurname:");
+        newStudent.email = inputValidatorsUtils::getTextInput("\nEmail:");
+        newStudent.age = inputValidatorsUtils::getIntInput("\nAge: ");
+        students.push_back(newStudent);
+        outputUtils::printTxtGreen("Student is created!");
+
+    }
+
+    void deleteStudent(vector<Student> &students) {
+        string email = inputValidatorsUtils::getTextInput("\nEnter email of student to delete:");
+
+        vector<Student>::iterator foundStudentToDelete = find_if(
+            students.begin(), 
+            students.end(), 
+            [&email](const Student& obj) {
+                return obj.email == email;
+        });
+
+        if (foundStudentToDelete != students.end()) {
+            students.erase(foundStudentToDelete);
+        } else {
+            outputUtils::printTxtRed("The student was not found!");
+        }
+    }
+
+    void displayAllStudents(vector<Student> &students) {
+        cout << setw(30) << "Name" << setw(30) << "Surname" << setw(30) << "Email" << setw(30) << "Age" << setw(30) << endl;
+
+        for (Student& student : students) {
+            cout << setw(30) << student.name << setw(30) << student.surname << setw(30) << student.email << setw(30) << student.age << setw(30) << endl;
+        }
     }
 
 } // namespace mainTasks

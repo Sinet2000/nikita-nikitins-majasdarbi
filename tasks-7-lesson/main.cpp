@@ -5,7 +5,7 @@
 
 #include "utils/main_menu.h"
 
-// #include "main-tasks/first-task.h"
+#include "main-tasks/first-task.h"
 // #include "main-tasks/second-task.h"
 // #include "main-tasks/third-task.h"
 // #include "main-tasks/fourth-task.h"
@@ -38,7 +38,7 @@ int main(int argc, const char * argv[]) {
 MainMenu initializeProgramMenu() {
   MainMenu mainProgram("Tasks after 6th Lesson");
 
-  mainProgram.addItem("(1.uzd) Student Management", &mainTasks::saveUserEnteredTxt);
+  mainProgram.addItem("(1.uzd) Student Management", &mainTasks::taskMenuRunnerFirst);
 
   mainProgram.addItem("Exit", true);
 
